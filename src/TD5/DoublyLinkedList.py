@@ -80,3 +80,6 @@ class DoublyLinkedList:
             count +=1
             current = current.next
         return count
+
+    def remove_at(self,position):
+        pass #Not implimented
