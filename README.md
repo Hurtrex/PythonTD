@@ -9,6 +9,7 @@ Either it will be my solution or the teacher solution with comments explaining h
 I will also maybe explain some stuff here
 
 ## BST
+### Left smaller, right greater
 
 ### RPL
 Right Parent Left
@@ -35,11 +36,12 @@ graph TD
 ```
 
 ## DFT
+### Depth First Traversal
 
 1,2,3
 
-5,6,7
+3,6,7
 
 8,10,69
 
-**1,2,3,5,6,7,8,10,69**
+**1,2,3,3,6,7,8,10,69**
