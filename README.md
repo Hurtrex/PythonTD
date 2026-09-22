@@ -5,4 +5,41 @@ This repository is used for putting my TD in to keep it **clean and organized.**
 The TD are under the folder src -> TDx.
 
 Either it will be my solution or the teacher solution with comments explaining here and there what the code do.
-<img width="2048" height="1536" alt="Gc5wNQYWgAA3WK4" src="https://github.com/user-attachments/assets/6ba5a952-e323-4158-a1c2-4af4380cde5d" />
+
+I will also maybe explain some stuff here
+
+## BST
+
+### RPL
+Right Parent Left
+
+```mermaid
+graph TD
+A{P}
+A --> B[R]
+A --> C[L]
+```
+### Example
+
+```mermaid
+graph TD
+  A{3}
+  A -->|Parent|B{2}
+  A --> |Root|C{10}
+  B -->|RC|D{1}
+  B -->|LC|E{3}
+  C --> F{7}
+  C --> G{69}
+  F --> H{6}
+  F --> I{8}
+```
+
+## DFT
+
+1,2,3
+
+5,6,7
+
+8,10,69
+
+**1,2,3,5,6,7,8,10,69**
