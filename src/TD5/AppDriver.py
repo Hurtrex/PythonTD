@@ -11,6 +11,21 @@ values.add_front(2)
 print(values)
 
 print(values.find_node(4))
+#Show the first
 print(values.find_node(0))
+#Show None
 print(values.find_node(-4))
+#Show the last
 print(values.find_node(90))
+
+#Put item at the start
+values.put(150,0)
+print(values)
+
+#Put None cuz negative
+values.put(155,-1)
+print(values)
+
+#Put the item at the end
+values.put(155,50)
+print(values)

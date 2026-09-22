@@ -44,13 +44,21 @@ class DoublyLinkedList:
 
     def put(self, item, position):
         if position <0:
-            return
+            return None
         if position > self.length():
             self.add_back(item)
+            return None
         if position == 0:
             self.add_front(item)
+            return None
         new_node = DoublyLinkedNode(item)
         found = self.find_node(position)
+        if found is not None:
+            new_node.previous = found.previous
+            new_node.next = found
+            found.previous.next = new_node
+            found.previous = new_node
+        return None
 
     def find_node(self, position):
         if position < 0:
