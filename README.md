@@ -44,4 +44,6 @@ graph TD
 
 8,10,69
 
+>which read go from 1 to 2 to 3 then go up to 3 then all the way down to 6 then 7 back down to 8, 10 and 69
+
 **1,2,3,3,6,7,8,10,69**
