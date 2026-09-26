@@ -1,0 +1,266 @@
+Les arbres: structure et
+      algorithmes
+       rouanehm@gmail.com
+Les arbres
+• Des nœuds reliés par
+  des arrêtes
+• Les types de nœuds
+  dans un arbre:
+   • Des nœuds internes
+     avec des fils
+   • Des nœuds feuilles
+     sans fils
+   • Un nœud racine, le
+     seule nœud qui n’a
+     pas de père.
+                          https://www.codementor.io/@leandrotk100/everything-
+                          you-need-to-know-about-tree-data-structures-pynnlkyud
+Quelques définitions associées à l’arbre
+• Profondeur d’un nœud :
+  la distance en terme de
+  nombre d’arrêtes entre
+  le nœud racine et le
+  nœud concerné.
+• Hauteur : La plus
+  grande profondeur
+  d’une feuille de l’arbre
+• Taille d’un arbre : le
+  nombre de nœuds (tous
+  types confondus).
+
+                             https://medium.com/swlh/making-data-trees-in-python-3a3ceb050cfd
+Quelques définitions associées à l’arbre
+• Étiquette : certains arbres
+  associent des labels aux
+  arrêtes. Ces labels
+  peuvent être simples
+  (nombre: poids) ou des
+  structures complexes
+  (objets)
+• Niveau : un ensemble de
+  nœud de même
+  profondeur
+• Descendants : tous les
+  nœuds des sous arbres.
+
+                                https://medium.com/swlh/making-data-trees-in-python-3a3ceb050cfd
+Arbre versus un graph
+• Dans un graphe il n’y a
+  pas de racine comme
+  dans un arbre.
+• Un arbre est un graphe
+  sans cycle muni d’un seul
+  point d’entrée: la racine.
+• Dans un graphe, souvent
+  les connections (arrêtes)
+  sont bidirectionnelles.
+Types d’arbres
+• General tree
+• Binary tree
+• Binary search tree (BST)
+• AVL tree (BST auto-balancé) [1]
+• Red-black tree [2]
+• Splay tree
+• Treap (BST + Heap)
+• B-tree [3]
+    https://towardsdatascience.com/8-useful-tree-
+    data-structures-worth-knowing-8532c7231e8c
+Types d’arbres :
+Arbre général (N-ary tree)
+Types d’arbres:
+Arbre binaire
+Types d’arbres :
+Catégories d’arbres binaires
+• Chaque nœud possède au plus deux fils.
+• Plusieurs catégories d’arbres binaires:
+    1. Arbre binaire entier (full Binary Tree): tous les
+        nœuds possèdent absolument deux fils ou
+        rien
+                                                                   Perfect BT
+   2. Arbre binaire parfait (Perfect Binary Tree) : un
+      arbre binaire où tous les nœuds internes ont
+      exactement deux fils et toutes les feuilles sont
+      de même niveau (profondeur).
+
+   3. Arbre binaire complet (Complete Binary Tree):
+      Chaque niveau est complètement rempli,
+      toutes les feuilles sont rangées à gauche et la
+      dernière feuille peut ne pas avoir un sibling de
+      droite.                                              Complete BT          Full BT
+Types d’arbres :
+Catégories d’arbres binaires (suite)
+
+
+
+
+https://www.codesdope.com/course/dat
+a-structures-binary-trees/
+Tree ADT
+
+
+
+
+           Data Structures and Algorithms in Python.Goodrich.2013.P.205
+Implémenter un arbre binaire :
+Les alternatives
+• Deux implémentations:
+  • Avec un tableau :
+     • Solution simple
+     • Accès rapide
+     • Perte de mémoire
+  • Avec une structure chainée :
+     • Solution un peu plus complexe
+     • Opérations moins rapide
+Implémenter un arbre binaire :
+Structure contiguë
+• L’arbre est représenté par un tableau
+• La racine est en première position (indice 0)
+• Si un nœud est à la position i, alors ses fils se trouvent aux positions 2i+1 et 2i+2
+• Si l’arbre binaire n’est pas un arbre binaire complet, le tableau contiendra des
+  trous qu’il faudra pouvoir identifier (ex. avec une information spéciale).
+• Avantages :
+   • Implémentation facile
+   • Complexité en temps des opérations : O(1)
+• Inconvénients :
+   • Peut contenir un nombre fixe de nœuds (vue que le tableau est de taille limitée)
+   • Si l’arbre a une grande hauteur et peu de nœuds, il peu y avoir un gaspillage de mémoire
+Implémenter un arbre binaire :
+Structure contiguë – Code Python
+
+
+
+
+                           https://www.codesdope.com/cour
+                           se/data-structures-binary-trees/
+Implémenter un arbre binaire :
+Structure chainée
+• Structure dynamique
+   • Une donnée
+   • Des pointeurs vers les fils
+   • Un pointeur vers le parent
+      est parfois utile
+• Avantages :
+   • Peut contenir un nombre variable de nœuds
+   • Économie de la mémoire
+• Inconvénients :
+   • Maitriser l’allocation dynamique
+   • Pas d’accès directe à un nœud de l’arbre (il faut un parcours)
+Implémenter un arbre binaire :
+Structure chainée – Code Python
+BST
+• Un arbre binaire de recherche est
+  un arbre binaire ordonné tel que
+  pour tout nœud :
+   • Toutes les valeurs du sous-arbre
+     gauche de ce nœud sont
+     strictement inférieures à la valeur
+     de ce nœud.
+   • Toutes les valeurs du sous-arbre
+     droit de ce nœud sont supérieures
+     ou égales à la valeur de ce nœud.
+BST :
+add(key)
+• L'insertion est assez similaire à la recherche. Il faut commencer à la
+  racine et descendre récursivement dans l'arborescence à la recherche
+  d'un emplacement dans le BST pour insérer un nouveau nœud. Si
+  l'élément à insérer est déjà dans l'arborescence, il faut le mettre à
+  jour (remplacer la donnée associée à la clé). Le nouveau nœud
+  remplacera toujours une référence nulle.
+
+
+   https://www.cs.cmu.edu/~adamchik
+   /15-121/lectures/Trees/trees.html
+BST:
+remove(key)
+• Plusieurs cas à considérer
+  pour le nœud à supprimer:
+   • C’est une feuille : le cas le
+     plus simple
+   • A un seul fils : relier l’enfant
+     au parent
+   • A deux fils : remplacer le
+     nœud par l’enfant le plus
+     grand dans le sous arbre de
+     gauche (ou le fils le plus
+     petit dans le sous arbre de
+     droite).
+                                        https://www.cs.cmu.edu/~adamchik/15-121/lectures/Trees/trees.html
+Applications de l’arbre:
+• Expressions arithmétiques
+    • Racine : opération
+    • Fils : les opérandes
+• Arbre binaire de recheche (BST)
+• Arbre syntaxique : pour représenter l’analyse
+  d’une phrase
+• Arbre lexicographique : pour représenter un
+  dictionnaire (ensemble de mots).
+Applications de l’arbre:
+• Structure d’un volume de stockage
+• Utilisé dans tous les jeux vidéo pour déterminer quels objets
+  devraient être mis en forme (rendered).
+• Utilisé avec les algorithmes de compression tells que .jpeg et .mp3
+• D’autres applications:
+   • https://stackoverflow.com/questions/2130416/what-are-the-applications-of-
+     binary-trees
+Algorithme de Huffman
+• Technique de compression sans perte
+  a hérité du nom de son inventeur,
+  David Huffman.
+• Le codage de Huffman est utilisé pour
+  la compression du son au
+  format MP3 et des images aux
+  formats PNG et JPEG.
+• Exemple : le mot "JULONOVO" compte
+  1 fois les lettres "J, U, L, N, V" et 3 fois
+  la lettre "O". Les lettres sont donc
+  codées comme suit : J : 000 - U : 001 - L
+  : 010 - N : 011 - V : 10 - O : 11. Ainsi, Le
+  caractère "O" qui apparaît le plus
+  souvent reçoit un code plus court que
+  les autres.
+                                                 https://www2.ulb.ac.be/cours/acohen/travaux_2006_inf
+                                                 odoc/CompressionNumerique/SansPerteHuffman.htm
+Complexité avec un arbre binaire
+Complément:
+Les algorithmes de parcours d’un
+arbre binaire
+Pre-order, In-order, Post-order
+Level-wise (Breadth-first)
+Les types de parcours en profondeur d’abord
+
+
+
+
+• PreOrder - 8, 5, 9, 7, 1, 12, 2, 4, 11, 3
+• InOrder - 9, 5, 1, 7, 2, 12, 8, 4, 3, 11
+• PostOrder - 9, 1, 2, 12, 7, 5, 3, 11, 4, 8
+• LevelOrder - 8, 5, 4, 9, 7, 11, 1, 12, 3, 2
+                                                https://www.cs.cmu.edu/~adamchik/15-121/lectures/Trees/trees.html
+Parcours d’un arbre binaire :
+Parcours en profondeur infixe (in-Order)
+• Parcours infixe (en ordre) : Chaque nœud est visité après son fils
+  gauche et avant son fils droit.
+Parcours d’un arbre binaire :
+Parcours en profondeur préfixe (pre-Order)
+• Parcours préfixe (en pré-ordre) : chaque nœud est visité avant ses fils.
+Parcours d’un arbre binaire :
+Parcours en profondeur postfixe (Post-Order)
+• Parcours postfixe (en post-ordre) : chaque nœud est visité après ses
+  deux fils.
+Parcours d’un arbre binaire :
+Parcours en largeur (Breadth-First Traversal)
+Parcours d’un arbre binaire :
+Parcours en largeur (Breadth-First Traversal)
+• Implémentation à l’aide d’une file en O(n)
+Références
+• https://www.baeldung.com/java-binary-tree
+• https://www.youtube.com/watch?v=j-TSLUFV_CY
+• https://opendatastructures.org/versions/edition-0.1d/ods-
+  java/node36.html
+• https://medium.com/quick-code/data-structures-traversing-trees-
+  9473f6d9f4ef
+• https://www.programiz.com/dsa/trees
+• https://runestone.academy/runestone/books/published/pythonds/Tr
+  ees/toctree.html
+• https://www.codesdope.com/course/data-structures-binary-trees/
+

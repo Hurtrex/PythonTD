@@ -1,0 +1,213 @@
+Structures de données linéaires:
+          ADT Queue
+          rouanehm@gmail.com
+Notion de Queue (File)
+• Une file est une structure linéaire permettant de
+  stocker et de restaurer des données selon un
+  ordre FIFO (First In, First Out ou « premier
+  entré, premier sorti »)
+• Liste dans laquelle seul l’insertion et la lecture se
+  font à des extrémités opposées :
+   • Les insertions (enfilements) se font à une extrémité
+     appelée queue de la file.
+   • Les suppressions (défilements) se font à l'autre
+     extrémité appelée tête de la file.
+
+• Synonymes : file de priorité, queue.
+Manipulation d’une file
+Opérations sur une file
+Implémenter une file :
+Les deux grandes alternatives
+• Représentation contiguë :
+   • Les éléments de la file sont rangés dans un tableau (simple ou circulaire)
+   • Deux entiers représentent respectivement les positions de la tête et de la
+     queue de la file
+• Représentation chainée :
+   • Les éléments de la file sont chaînés entre eux
+   • Un pointeur sur le premier élément désigne la file et représente la tête de
+     cette file
+   • Un pointeur sur le dernier élément représente la queue de file
+   • Une file vide est représentée par le pointeur NULL
+Implémenter une file :
+Tableau ordinaire
+
+
+
+
+https://www.geeksforgeeks.org/array-implementation-of-queue-simple/
+Implémenter une file :
+Tableau circulaire
+
+
+
+
+https://www.geeksforgeeks.org/circular-queue-set-1-introduction-array-implementation/
+Implémenter une file :
+Liste chainée simple
+Implémenter une file :
+Liste doublement chainée
+
+
+
+
+ https://www.geeksforgeeks.org/implemen
+ tation-deque-using-doubly-linked-list/
+Patron adaptateur :
+Utiliser une liste pour implémenter une file
+• Deux alternatives :
+   • Héritage :
+      • La file hérite de la liste. Les méthodes de
+        la liste sont protégées et donc accessible
+        uniquement par la file.
+   • Délégation :
+      • le patron de conception Adapter
+      • La file est un adaptateur
+      • La liste est l’adaptée
+ Complexité des opérations dans une file
+
+Opérations       Tableau        Tableau circulaire   Liste chaine         Liste doublement chainée circulaire
+                 Simple         Avec deux indices    simple avec          avec une seule tête (head)
+                                                     head et tail
+enqueue()        O(1) -> O(n)   O(1) -> O(n)         O(1) -> O(n)         O(1)
+                 Redimens.      redimensionnement
+dequeue()        O(n)           O(1)                 O(1)                 O(1)
+front()/peek()   O(1)           O(1)                 O(1)                 O(1)
+isEmpty()        O(1)           O(1)                 O(1)                 O(1)
+length()         O(1)           O(1)                 O(1) -> O(n)         O(1) -> O(n)
+                                                     Si pas de var size   Si pas de var size
+File à priorité
+• Ensemble dynamique d’objets classés par ordre de priorité
+   • Permet d’extraire un objet possédant la plus grande priorité
+   • En pratique, on représente les priorités par les clés
+   • Suppose un ordre total défini sur les clés
+        Insérer un élément                      Supprimer un élément
+Implémenter une file à priorité :
+Le principe du Heap
+• La structure fondamentale d’une file à
+  priorité est un arbre binaire avec la
+  condition qu’un nœud est l’élément le
+  plus prioritaire de tous ses
+  descendants (un Heap).
+• Trois alternatives :
+   • Arbre binaire complet réel
+   • Arbre binaire complet dans un tableau
+   • Arbre binaire complet dans une liste
+     chainée
+• Note : un arbre binaire est complet si
+  tous les niveaux sont pleins, excepté le
+  dernier niveau. Un niveau h peut avoir
+  au max 2h
+Implémenter une file à priorité :
+ADT Heap
+
+
+
+
+                https://zhu45.org/posts/2017/Apr/09/maw-chapter-6-reflection/
+Implémenter une file à priorité :
+Min Heap vs Max Heap
+
+
+
+
+          https://www.techiedelight.com/introduction-priority-queues-using-binary-heaps/
+Implémenter une file à priorité :
+Représenter un Heap avec un tableau
+• Représentation typique
+• Les éléments sont rangés dans
+  un tableau avec les conditions ci-
+  dessous :
+• Pour un élément d’indice i, ses
+  enfants sont stockés aux indice
+  2*i (gauche) et 2*i+1 (droit)
+• La racine est l’élément le plus
+  prioritaire.
+                                       https://towardsdatascience.com/data-structure-heap-23d4c78a6962
+Implémenter un Heap avec un tableau :
+Opération insert() et heapify_up(i)
+• L’opération insert (ou push)
+  permet d’insérer un nouveau
+  item dans la file dont il faudra
+  trouver la bonne position afin de
+  respecter l’ordre dans le heap.
+• L’opération insert ajoute le
+  nouveau item à la fin du tableau
+  et est toujours suivie de
+  l’opération heapify_up(i) qui
+  permet de rétablir l’ordre en
+  comparant le nœud avec sont
+  parent de façon récursive en
+  commençant par le nouvel item
+  ajouté.
+    https://www.techiedelight.com/introduction-
+    priority-queues-using-binary-heaps/
+Implémenter un Heap avec un tableau :
+Opération insert() et heapify_up(i)
+Implémenter un Heap avec un tableau :
+Opération remove() et heapify_down(i)
+• remove (ou pop) permet de retirer
+  du heap (la file à priorité)
+  l’élément le plus prioritaire, i.e, la
+  racine.
+• La racine est remplacée par le
+  dernier éléments dans le tableau
+  (le dernier niveau de l’arbre, le
+  plus droite).
+• Le remplacement de la racine
+  provoque une incohérence dans le
+  principe du heap et il faut le
+  réarranger en invoquant
+  l’opération heapify_down() qui
+  remplace un nœud racine par l’un
+  de ses fils de façon récursive
+  jusqu’en bas de l’arbre.
+
+    https://www.techiedelight.com/introduction-
+    priority-queues-using-binary-heaps/
+Implémenter un Heap avec un tableau :
+Opération remove() et heapify_down(i)
+Implémenter un Heap avec un tableau :
+Ordre de grandeur de la hauteur d’un heap
+• Un heap qui stocke n clés a une hauteur h = O (log2 n)
+• Preuve:
+   • Nombre total des nœuds dans un arbre binaire complet de hauteur h est comme suit:
+     n = 1 + 2+ 4 + ..+ 2h
+   • Nous savons que 1 + 2+ 4 + ..+ 2h = 2(h+1) -1 . Ainsi, n = 2(h+1) -1
+   • Donc hauteur h = log2(n + 1) − 1
+   • Par conséquent, h est de O(log n) en pire cas pour beaucoup de genres d’arbres de
+     recherche équilibrés ( AVL, rouge-noir, arbre 2-3-4, etc.)
+Implémenter un Heap avec un tableau :
+Complexité des opérations
+• Les opérations prennent un
+  temps proportionnel à la
+  hauteur (nombre de niveau)
+  de l’arbre.
+• L’opération heapify réalise à
+  chaque étape un certains
+  nombre d’opérations en un
+  temps constant.
+• Ainsi, insert, remove sont
+  tous les deux en O(log2 n).
+Applications des files à priorité
+• Run multiple programs in the operating system
+   • “critical” before “interactive” before “compute-intensive”
+   • Maybe let users set priority level
+• Treat hospital patients in order of severity (or triage)
+• Select print jobs in order of decreasing length?
+• Forward network packets in order of urgency
+• Select most frequent symbols for data compression (cf. capstone project)
+• Sort: insert all, then repeatedly deleteMin (HeapSort)
+• Discrete event simulation
+Références
+• https://algorithmtutor.com/Data-Structures/Basic/Queues/
+• https://www.geeksforgeeks.org/circular-queue-set-1-introduction-array-
+  implementation/
+• http://algorithms.mrseliasclasses.org/queue-adt/
+• https://jipe.developpez.com/articles/algo/file-priorite/#LI-A
+• https://towardsdatascience.com/data-structure-heap-23d4c78a6962
+• https://www.techiedelight.com/introduction-priority-queues-using-binary-
+  heaps/
+• https://runestone.academy/runestone/books/published/pythonds/Trees/B
+  inaryHeapImplementation.html
+• https://www.irif.fr/~francoisl/DIVERS/l3algo1819tasfiles.pdf
+

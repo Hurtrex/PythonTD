@@ -1,0 +1,109 @@
+Structures de données
+       avancées
+   Les graphes : structure et algorithmes
+Définition
+• Un graphe G est constitué de 2 ensembles V et E.
+   • V (Vertices) : un ensemble non vide de sommets.
+   • E (Edges) : un ensemble de paires de sommets de V.
+       • Ces paires sont appelés aussi des arêtes ou arcs (si orientés)
+• On écrit G = (V,E) pour représenter le graphe.
+• Les sommets et les arêtes peuvent être étiquetés par informations
+• Un graphe est orienté ou non. Dans un graphe non orienté, le parcours
+  d’un sommet à un autre peut se faire dans les deux sens.
+• Dans un graphe non orienté, la paire de sommets représentant une arête
+  n’est pas ordonnées. Autrement dit, les (v1, v2) et (v2, v1) représentent la
+  même arête.
+Exemple
+Terminologie (1/5)
+Terminologie (2/5)
+Terminologie (3/5)
+Terminologie (4/5)
+Terminologie (5/5)
+Types de graphes :
+Undirected graph
+• Un graphe est une paire (V,E) où
+   • V (vertices) : un ensemble de nœuds appelés sommets
+   • E (edges): un multi-ensemble de paires de sommets
+     appelées arêtes.
+   • On peut voir les sommets et les arêtes comme des positions
+     gardant des objets en mémoire
+• Exemples:
+   • Chaque sommet représente un aéroport et garde en
+     mémoire le code de 3 lettres représentant cet aéroport
+   • Chaque arête représente une route aérienne entre deux
+     villes et garde en mémoire la longueur de cette route
+Types de graphes :
+Directed graph (digraph)
+• G= (V,E)
+• Chaque arête (u,v) est
+  orientée
+Types de graphes :
+Graphe pondéré
+• G= (S,A)
+• Chaque arête (u,v) a
+  un poid w(u,v), aka,
+  coût.
+Types de graphes :
+Graphe acyclique (Directed Acyclic Graph –DAG –)
+• Un graphe orienté qui ne contient pas de cycle.
+TAD Graphe
+Implémenter un graphe :
+Représenter les sommets et les arêtes
+Implémenter un graphe :
+Liste d’arêtes – Le principe
+• Le graphe est une collection de triplets:
+   • Sommet source
+   • Sommet destination
+   • Les informations de l’arête (ex. le poids)
+• Le graphe doit aussi avoir une liste de sommets car le graphe peut avoir
+  des sommets sans arêtes (non connectés).
+• Structure simple mais opérations complexes.
+Implémenter un graphe :
+Liste d’arêtes – Le code
+Implémenter un graphe:
+les listes d’adjacences – Le principe
+• Une table de hachage pour stocker les sommets
+• À chaque sommet est associé une liste de voisins
+• Les graphes orientés enregistrent seulement les sommets au bout des arcs sortants.
+Implémenter un graphe:
+les listes d’adjacences – Le code
+Implémenter un graphe:
+Matrice d’adjacences – Le principe
+• Étant donné un graphe G=(V,E) avec V={1, ..., n}
+• La matrice A=(aij) de dimension n x n avec aij=1 si (i,j) dans E (ou le poids
+  wij) ou aij=0 sinon (ou le poids infini)
+Implémenter un graphe:
+Matrice d’adjacences – Le code
+Algorithmes de graphes populaires :
+Le plus court chemin dans un graphe
+• Graphe orienté (digraph) ou non.
+• Calcul des plus courts chemins à partir d’un sommet donné vers un autre sommet
+• Plusieurs algorithmes
+   • Dijkstra (poids positifs uniquement)
+        • https://haltode.fr/algo/structure/graphe/plus_court_chemin/dijkstra.html
+   • Bellman-Ford (poids négatifs aussi)
+        • https://haltode.fr/algo/structure/graphe/plus_court_chemin/bellman_ford.html
+
+
+
+
+  https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/
+Domaines d’applications des graphes
+• Réseaux sociaux
+• Réseaux informatiques
+• Télécommunications
+• World Wide Web
+• Cartes routières
+• Etc.
+Références
+• Introduction to algorithms, http://courses.csail.mit.edu/6.006/fall10/
+• http://www.dil.univ-mrs.fr/~gcolas/algo-licence/slides/graphes-algo1.pdf
+• https://www.baeldung.com/java-graphs
+• https://opendatastructures.org/versions/edition-0.1d/ods-
+  java/node59.html
+• https://www.youtube.com/watch?v=85bHg5AipvU&list=PLLMXbkbDbVt8JL
+  umqKj-3BlHmEXPIfR42
+• https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/
+• https://algorithms.tutorialhorizon.com/site-map/
+• http://www.btechsmartclass.com/data_structures/graph-traversal-bfs.html
+

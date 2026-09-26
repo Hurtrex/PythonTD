@@ -1,0 +1,242 @@
+Algorithmes de tri
+rouanehm@gmail.com
+
+Plan
+- Le problème de tri
+- Contexte général du tri
+- Les algorithmes populaires de tri
+  1. Tri par sélection
+  2. Tri par insertion
+  3. Tri par bulles (Bubble Sort)
+  4. Tri par fusion (Merge Sort)
+  5. Tri insertion binaire (Binary Insertion Sort)
+
+Le problème de tri
+- Un des problèmes algorithmiques les plus fondamentaux
+- Input : une séquence de n nombres e1, e2, …, en munie d'une relation d'ordre total, p.e., <=
+- Output : une permutation de la séquence de départ telle qu'un ordre total est établi : e'1 <= e'2 <= …. <= e'n
+- Applications :
+  - Tri des résultats d'un moteur de recherche
+  - Tri des messages selon un critère (date, priorité, etc.)
+  - Des études montrent que 25% du temps du CPU est utilisé pour faire le tri
+- Pour le reste du cours, on suppose pour simplifier qu'on trie des tableaux d'entiers car souvent on doit trier des clés de tout type.
+
+Contexte général du tri
+- On dispose de n données en mémoire centrale (tri interne, par opposition au tri externe d'une séquence dans une mémoire de masse) qu'il s'agit d'ordonner d'une certaine manière (ex. croissante).
+- Les données sont comparables (relation d'ordre entre les items)
+- Deux classes d'algorithmes :
+  - en temps O(n^2) dans le cas le pire
+  - en temps O(n log n) dans le cas le pire
+- La complexité minimale possible est en O(n log n)
+
+Tri par sélection (Selection Sort) — Principe et complexité
+- Algorithme intuitif
+- Principe :
+  - On cherche le minimum (resp. maximum) dans la collection.
+  - On échange ce minimum (resp. maximum) avec le premier élément de la collection.
+  - On recommence avec la collection restante, jusqu'à épuisement de tous les items
+- Complexité : O(n^2)
+  O(n + (n-1) + ... + 2 + 1) ≡ O(sum_{i=1}^{n} i),  sum_{i=1}^{n} i = n(n+1)/2
+
+Tri par sélection (Selection Sort) — Un exemple
+- Exemple avec [7,5,4,2] :
+  STEP 1: min element=2 -> Sorted [2], Unsorted [5,4,7]
+  STEP 2: min element=4 -> Sorted [2,4], Unsorted [5,7]
+  STEP 3: min element=5 -> Sorted [2,4,5], Unsorted [7]
+  STEP 4: min element=7 -> Sorted [2,4,5,7]
+- https://www.hackerearth.com/practice/algorithms/sorting/selection-sort/tutorial/
+- https://www.youtube.com/watch?v=ewU9oET3nJ8
+
+Tri par sélection (Selection Sort) — Implémentation en Python
+# Amine - Colval
+def selection_sort(values):
+    for i in range(len(values) - 1):
+        min_index = i
+        for j in range(i + 1, len(values)):
+            if values[j] < values[min_index]:
+                min_index = j
+        values[i], values[min_index] = values[min_index], values[i]
+
+
+def main():
+    data = [3, 1, 41, 59, 26, 53, 59, -1]
+    print(data)
+    selection_sort(data)
+    print(data)
+
+Tri par insertion (Insertion Sort) — Principe et complexité
+- Algorithme intuitif
+- Principe :
+  - Un algorithme qui insère un élément dans une liste d'éléments déjà triés (une file à priorité).
+  - On suppose que les i premiers éléments de la liste sont déjà triés.
+  - On insère à la bonne place l'élément (i+1) parmi les i premiers de façon à respecter l'ordre déjà établi.
+  - On itère jusqu'à insérer le dernier élément.
+- Complexité : O(n^2)
+  - Dans le pire des cas, chaque élément est comparé à tous les autres éléments du tableau trié. Par conséquent, la complexité temporelle est O(n^2).
+
+Tri par insertion (Insertion Sort) — Exemples
+i=1: [6,5,3,1,8,7,2,4] -> [5,6,3,1,8,7,2,4]
+i=2: [5,6,3,1,8,7,2,4] -> [3,5,6,1,8,7,2,4]
+i=3: [3,5,6,1,8,7,2,4] -> [1,3,5,6,8,7,2,4]
+i=4: [1,3,5,6,8,7,2,4] -> [1,3,5,6,8,7,2,4]
+i=5: [1,3,5,6,8,7,2,4] -> [1,3,5,6,7,8,2,4]
+i=6: [1,3,5,6,7,8,2,4] -> [1,2,3,5,6,7,8,4]
+i=7: [1,2,3,5,6,7,8,4] -> [1,2,3,4,5,6,7,8]
+- Illustration avec [7,4,5,2]: étape par étape, 7 est comparé et déplacé au fur et à mesure que 4, puis 5, puis 2 sont insérés à leur position correcte, aboutissant à [2,4,5,7].
+- https://www.hackerearth.com/practice/algorithms/sorting/insertion-sort/tutorial/
+- https://www.youtube.com/watch?v=v_eKybSV4yk
+- https://www.wikiwand.com/fr/Tri_par_insertion
+
+Tri par insertion (Insertion Sort) — Implémentation en Python
+# Amine - Colval
+def insertion_sort(values):
+    for index in range(0, len(values)-1):
+        current_position = index
+        value_to_sort = values[index]
+        while current_position > 0 and \
+                values[current_position - 1] > value_to_sort:
+            values[current_position] = values[current_position - 1]
+            current_position -= 1
+        values[current_position] = value_to_sort
+
+
+def main():
+    data = [3, 1, 41, 59, 26, 53, 59]
+    print(data)
+    insertion_sort(data)
+    print(data)
+
+Tri par bulles (Bubble Sort) — Principe et complexité
+- Principe :
+  - On balaye la collection en échangeant deux éléments consécutifs s'ils sont dans le mauvais ordre. Le plus grand élément de la collection est donc repoussé à la fin.
+  - On recommence à partir du début, avec les n-1 premiers éléments et ainsi de suite.
+  - Cela ressemble un peu au tri par sélection, à ceci près qu'on utilise la recherche du maximum pour corriger quelques autres inversions.
+  - Le nom vient de ce que les grands éléments sautent par dessus les plus petits jusqu'à la fin du tableau, comme des bulles
+- Complexité : O(n^2)
+  - The complexity of bubble sort is O(n^2) in worst case, because the entire array needs to be iterated for every element.
+
+Tri par bulles (Bubble Sort) — Exemples
+STEP 1: [7,4,5,2] -> swap(4,7): [4,7,5,2] -> swap(5,7): [4,5,7,2] -> swap(2,7): [4,5,2,7]
+STEP 2: [4,5,2,7] -> no swap (5>4) -> swap(2,5): [4,2,5,7]
+STEP 3: [4,2,5,7] -> swap(2,4): [2,4,5,7] (sorted array)
+- https://www.hackerearth.com/practice/algorithms/sorting/bubble-sort/tutorial/
+- https://www.youtube.com/watch?v=nmhjrI-aW5o
+
+Tri par bulles (Bubble Sort) — Implémentation en Python
+# Amine - Colval
+def bubble_sort(values):
+    for i in range(len(values)):
+        for j in range(len(values) - 1):
+            if values[j] > values[j + 1]:
+                values[j], values[j + 1] = values[j + 1], values[j]
+
+
+def bubble_sort_v2(values):
+    has_swapped = True
+    while has_swapped:
+        has_swapped = False
+        for i in range(len(values) - 1):
+            if values[i] > values[i + 1]:
+                values[i], values[i + 1] = values[i + 1], values[i]
+                has_swapped = True
+
+Tri par fusion (Merge Sort) — Principe et complexité
+- Technique : diviser pour régner
+- Principe :
+  - On divise la collection en deux parties égales (de taille n/2).
+  - On trie chacune de ces deux parties.
+  - Finalement, on fusionne ces deux parties triées.
+- Complexité : O(n log n)
+  - La liste de taille n est divisée en un maximum de (log n) parties, et la fusion de toutes les sous-listes en une seule liste prend un temps O(n), le pire des cas d'exécution de cet algorithme est O(n log n).
+
+Tri par fusion — Exemples
+- Exemple détaillé de Tri-Fusion(T,0,6) sur [28,78,65,51,19,74,61] divisé récursivement (Tri-Fusion(T,0,3) et Tri-Fusion(T,4,6)) jusqu'aux sous-listes élémentaires, puis fusionné progressivement: 28|78 -> 28,78 ; 65|51 -> 51,65 ; 19|74 -> 19,74 ; 61 seul ; fusion -> 28,51,65,78 et 19,61,74 ; fusion finale -> 19,28,51,61,65,74,78.
+- Exemple parallèle avec arbre de récursion merge_sort(0,5) sur [9,7,8,3,2,1] aboutissant à [1,2,3,7,8,9] via divisions successives (mid=(0+5)/2=2, etc.) et fusions (merge).
+- https://www.youtube.com/watch?v=MbR1kaCyh7g
+
+Tri par fusion — Implémentation en Python
+def merge_sort(values, start, end):
+    if start >= end:
+        return
+    middle = (start + end) // 2
+    merge_sort(values, start, middle)
+    merge_sort(values, middle + 1, end)
+    merge(values, start, end, middle)
+
+
+def merge(values, start, end, middle):
+    left_copy = values[start:middle + 1]
+    right_copy = values[middle + 1:end + 1]
+    left_copy_index = 0
+    right_copy_index = 0
+    sorted_index = start
+
+    while left_copy_index < len(left_copy) and right_copy_index < len(right_copy):
+        if left_copy[left_copy_index] <= right_copy[right_copy_index]:
+            values[sorted_index] = left_copy[left_copy_index]
+            left_copy_index = left_copy_index + 1
+        else:
+            values[sorted_index] = right_copy[right_copy_index]
+            right_copy_index = right_copy_index + 1
+        sorted_index = sorted_index + 1
+
+    while left_copy_index < len(left_copy):
+        values[sorted_index] = left_copy[left_copy_index]
+        left_copy_index = left_copy_index + 1
+        sorted_index = sorted_index + 1
+
+    while right_copy_index < len(right_copy):
+        values[sorted_index] = right_copy[right_copy_index]
+        right_copy_index = right_copy_index + 1
+        sorted_index = sorted_index + 1
+
+Tri insertion binaire (Binary insertion sort) — Principe et complexité
+- Une variante du tri insertion dont la complexité est O(n^2)
+  - Au pire des cas, chaque élément est comparé à tous les autres éléments du tableau trié.
+- Principe : faire une recherche binaire de la position d'insertion d'un élément dans une liste déjà triée (une file à priorité).
+- Complexité :
+  - La recherche binaire coûte au pire cas log2(n) comparaisons
+  - Pour insérer les n éléments, le coût total est O(n log2 n)
+  - Toutefois, l'algorithme présente une complexité quadratique O(n^2) à cause des swaps nécessaires à chaque itération (un décalage des valeurs pour libérer la position d'insertion du nouvel élément est nécessaire). Le nombre total de décalages faits est n(n-1)/2.
+- Animation : https://www.youtube.com/watch?v=sr_bR1WwcLY
+
+Tri insertion binaire (Binary insertion sort) — Implémentation en Python
+def binary_insertion_sort(values):
+    for i in range(1, len(values)):
+        value = values[i]
+        position = binary_search_recursive(values, value, 0, i - 1)
+        values = values[:position] + [value] + values[position:i] + values[i + 1:]
+    return values
+
+
+# return position of item to find
+def binary_search_recursive(items, item_to_find, start, end):
+    if start == end:
+        if items[start] > item_to_find:
+            return start
+        else:
+            return start + 1
+    if start > end:
+        return start
+    middle = (start + end) // 2
+    if item_to_find == items[middle]:
+        return middle
+    if item_to_find < items[middle]:
+        return binary_search_recursive(items, item_to_find, start, middle - 1)
+    else:
+        return binary_search_recursive(items, item_to_find, middle + 1, end)
+
+Références
+- https://opendsa-server.cs.vt.edu/ODSA/Books/CS3/html/
+- Bubble sort : https://www.youtube.com/watch?v=b0SsPQYKq_U&list=PLLMXbkbDbVt9MIJ9DV4ps-_trOzWtphYO&index=166
+- https://gist.github.com/abonander/6648739
+- https://medium.com/@AlirezaMeskin/sorting-algorithms-in-functional-ways-in-scala-66aa4bf6414e
+- https://www.youtube.com/watch?v=yUVpaSnzETo
+- https://www.wikiwand.com/fr/Algorithme_de_tri
+- https://github.com/mypetyak/scala-algorithms/tree/master/sort
+- https://stackabuse.com/selection-sort-in-python/
+- https://stackabuse.com/merge-sort-in-python/
+- https://en.wikipedia.org/wiki/Timsort
+- https://medium.com/@rscheiwe/the-case-for-timsort-349d5ce1e414
+- https://hg.python.org/cpython/file/tip/Objects/listsort.txt
+- https://www.chrislaux.com/timsort.html

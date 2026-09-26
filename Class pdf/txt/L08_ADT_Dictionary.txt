@@ -1,0 +1,340 @@
+Dictionnaires
+rouanehm@gmail.com
+
+Dictionnaire
+- Définition : un dictionnaire est un ensemble dynamique d'objets avec des clés comparables. Cette structure est aussi connue par 'Map' du terme mathématique 'mapping' qui signifie une fonction.
+- Exemples d'application :
+  - Table de symboles dans un compilateur (symbole → type)
+  - Table de routage d'un DNS (adresse → chemin)
+- Exemple illustré : Turkey→Lira, Spain→Euro, Greece→Euro, China→Yuan, United States→Dollar, India→Rupee
+
+Dictionnaire en python : la classe dict
+- En python, dict est la classe la plus significative du langage.
+- https://realpython.com/python-dicts/
+- M[k] : Return the value v associated with key k in map M, if one exists; otherwise raise a KeyError. Implémenté avec __getitem__.
+- M[k] = v : Associate value v with key k in map M, replacing the existing value if the map already contains an item with key equal to k. Implémenté avec __setitem__.
+- del M[k] : Remove from map M the item with key equal to k; if M has no such item, raise a KeyError. Implémenté avec __delitem__.
+- len(M) : Return the number of items in map M. Implémenté avec __len__.
+- iter(M) : The default iteration for a map generates a sequence of keys in the map. Implémenté avec __iter__, permet for k in M.
+
+Table d'exemple d'opérations (dict Python) :
+Operation                Return Value         Map
+len(M)                    0                    {}
+M['K'] = 2                –                    {'K': 2}
+M['B'] = 4                –                    {'K': 2, 'B': 4}
+M['U'] = 2                –                    {'K': 2, 'B': 4, 'U': 2}
+M['V'] = 8                –                    {'K': 2, 'B': 4, 'U': 2, 'V': 8}
+M['K'] = 9                –                    {'K': 9, 'B': 4, 'U': 2, 'V': 8}
+M['B']                    4                    {'K': 9, 'B': 4, 'U': 2, 'V': 8}
+M['X']                    KeyError             {'K': 9, 'B': 4, 'U': 2, 'V': 8}
+M.get('F')                None                 {'K': 9, 'B': 4, 'U': 2, 'V': 8}
+M.get('F', 5)              5                    {'K': 9, 'B': 4, 'U': 2, 'V': 8}
+M.get('K', 5)              9                    {'K': 9, 'B': 4, 'U': 2, 'V': 8}
+len(M)                    4                    {'K': 9, 'B': 4, 'U': 2, 'V': 8}
+del M['V']                –                    {'K': 9, 'B': 4, 'U': 2}
+M.pop('K')                9                    {'B': 4, 'U': 2}
+M.keys()                  'B', 'U'             {'B': 4, 'U': 2}
+M.values()                4, 2                 {'B': 4, 'U': 2}
+M.items()                 ('B', 4), ('U', 2)   {'B': 4, 'U': 2}
+M.setdefault('B', 1)       4                    {'B': 4, 'U': 2}
+M.setdefault('A', 1)       1                    {'A': 1, 'B': 4, 'U': 2}
+M.popitem()                ('B', 4)             {'A': 1, 'U': 2}
+
+Dictionnaire en python : Compter la fréquence des mots d'un fichier
+input_file = 'D:\\GDrive\\F20\\5P6.SDA\\TD\\SDAF20TD\\src\\datasets\\input_file.txt'
+freq = {}
+for piece in open(input_file).read().lower().split():
+    # only consider alphabetic characters within this piece
+    word = ''.join(c for c in piece if c.isalpha())
+    if word:  # require at least one alphabetic character
+        freq[word] = 1 + freq.get(word, 0)
+
+max_word = ''
+max_count = 0
+for (word, count) in freq.items():
+    # (key, value) tuples represent (word, count)
+    if count > max_count:
+        max_word = word
+        max_count = count
+print(f'The most frequent word is {max_word}')
+print(f'Its number of occurrences is {max_count}')
+
+Dictionnaire en python : Complexité de dict versus liste []
+dict (d) :
+Index         d[k]               O(1)
+Store         d[k] = v           O(1)
+Length        len(d)             O(1)
+Delete        del d[k]           O(1)
+Containment   k in/not in d      O(1)
+Pop           d.pop(k)           O(1)
+Pop item      d.popitem()        O(1)
+Clear         d.clear()          O(1)  (similar to s={} or =dict())
+View          d.keys()           O(1)  (same for d.values())
+Construction  dict(...)          O(len(...)) (depends # (key,value) 2-tuples)
+Iteration     for k in d:        O(N) (all forms: keys, values, items)
+
+liste [] (l) :
+Index         l[i]               O(1)
+Store         l[i]=0             O(1)
+Length        len(l)             O(1)
+Append        l.append(5)        O(1)
+Pop           l.pop()            O(1)  (same as l.pop(-1), popping at end)
+Clear         l.clear()          O(1)  (similar to l=[])
+Slice         l[a:b]             O(b-a) (l[1:5]:O(l), l[:]:O(len(l)-0)=O(N))
+Extend        l.extend(...)      O(len(...)) (depends only on len of extension)
+Construction  list(...)          O(len(...)) (depends on length of ... iterable)
+check ==, !=  l1==l2             O(N)
+Insert        l[a:b]=...         O(N)
+Delete        del l[i]           O(N)
+Containment   x in/not in l      O(N) (searches list)
+Copy          l.copy()           O(N) (same as l[:] which is O(N))
+Remove        l.remove(...)      O(N)
+Pop           l.pop(i)           O(N) (O(N-i): l.pop(0):O(N) — see above)
+Extreme value min(l)/max(l)      O(N) (searches list)
+Reverse       l.reverse()        O(N)
+Iteration     for v in l:        O(N)
+Sort          l.sort()           O(N Log N) (key/reverse mostly doesn't change)
+Multiply      k*l                O(k N) (5*l is O(N): len(l)*l is O(N**2))
+Source: https://tp60011275.blogspot.com/2018/12/performance-of-python-data-structures.html
+
+ADT Dictionnaire
+- Les opérations les plus populaires d'un dictionnaire sont set/put, get et remove.
+- Dans beaucoup de langages on peut définir l'opérateur []
+Opérations formelles :
+- size() : Returns the number of entries in M.
+- isEmpty() : Returns a boolean indicating whether M is empty.
+- get(k) : Returns the value v associated with key k, if such an entry exists; otherwise returns null.
+- put(k, v) : If M does not have an entry with key equal to k, then adds entry (k,v) to M and returns null; else, replaces with v the existing value of the entry with key equal to k and returns the old value.
+- remove(k) : Removes from M the entry with key equal to k, and returns its value; if M has no such entry, then returns null.
+- keySet() : Returns an iterable collection containing all the keys stored in M.
+- values() : Returns an iterable collection containing all the values of entries stored in M (with repetition if multiple keys map to the same value).
+- entrySet() : Returns an iterable collection containing all the key-value entries in M.
+
+Exemple d'utilisation d'un dictionnaire
+- Get : recherche
+- Put : insertion
+- Remove : suppression
+
+Table de trace d'exemple :
+Method            Return Value    Map
+isEmpty()         true            {}
+put(5,A)          null            {(5,A)}
+put(7,B)          null            {(5,A),(7,B)}
+put(2,C)          null            {(5,A),(7,B),(2,C)}
+put(8,D)          null            {(5,A),(7,B),(2,C),(8,D)}
+put(2,E)          C               {(5,A),(7,B),(2,E),(8,D)}
+get(7)            B               {(5,A),(7,B),(2,E),(8,D)}
+get(4)            null            {(5,A),(7,B),(2,E),(8,D)}
+get(2)            E               {(5,A),(7,B),(2,E),(8,D)}
+size()            4               {(5,A),(7,B),(2,E),(8,D)}
+remove(5)         A               {(7,B),(2,E),(8,D)}
+remove(2)         E               {(7,B),(8,D)}
+get(2)            null            {(7,B),(8,D)}
+remove(2)         null            {(7,B),(8,D)}
+isEmpty()         false           {(7,B),(8,D)}
+entrySet()        {(7,B),(8,D)}   {(7,B),(8,D)}
+keySet()          {7,8}           {(7,B),(8,D)}
+values()          {B,D}           {(7,B),(8,D)}
+
+Comparaison d'API selon le langage :
+Operation      C++ (Map<keytype,valuetype>)   Java (HashMap<keytype,valuetype>)   C# (hashtable)
+get            Map[key]                        Get(key)                              Hash[key]
+put            Insert(key, value)               Put(key, value)                       Add(key, value)
+containsKey    Count(key)                       containsKey(key)                       —
+removeKey      Erase(key)                       Remove(key)                            —
+
+Implémentation d'un dictionnaire
+1. Implémentation par des structures de données simples :
+   1. Tableau
+      - Tableau avec les clés non triées
+      - Tableau avec les clés triées
+      - Tableau à accès direct
+   2. Listes chaînées
+2. Implémentation par des structures complexes :
+   1. Arbres binaires de recherche
+   2. Tables de hachage (prochain cours)
+
+Implémentation d'un dictionnaire : Un tableau non trié (1/2)
+- Les éléments (couples clé-valeur) sont stockés dans un tableau. Chaque position du tableau contient un couple (k,v)
+- Envisageable si on sait que la taille des ensembles (clés et valeurs) ne dépassera jamais la taille du tableau.
+- Avantage : simplicité
+- Inconvénients : opérations lentes.
+- L'implantation par tableau ou par liste chaînée du dictionnaire demande, dans le pire cas, n opérations pour exécuter une insertion, une suppression ou une recherche. Complexité : O(n).
+
+Implémentation d'un dictionnaire : Un tableau non trié (1/2) — code
+class UnsortedArrayMap(object):
+    def __init__(self):
+        self.__storage = []
+
+    def get(self, key):
+        for entry in self.__storage:
+            if key == entry.key:
+                return entry.value
+        raise KeyError('Key {repr(k)} not found')
+
+    def set(self, key, value):
+        for entry in self.__storage:
+            if key == entry.key:
+                entry.value = value
+                return
+        # did not find match for key
+        self.__storage.append(Entry(key, value))
+
+    def delete(self, key):
+        # Remove item associated with key k
+        for entry in range(len(self.__storage)):
+            if key == self.__storage[entry].key:
+                self.__storage.pop(entry)
+                return
+        raise KeyError('Key not found {repr(key)}')
+
+    def len(self):
+        return len(self.__storage)
+
+    def __iter__(self):
+        for entry in self.__storage:
+            yield entry.key
+
+    def __str__(self):
+        result = []
+        for entry in self.__storage:
+            result.append(str(entry))
+        to_return = ',\n'.join(result)
+        return '{' + to_return + '}'
+
+Entry class (extrait):
+class Entry(object):
+    def __init__(self, key, value, provided_hash=None):
+        self.key = key
+        self.value = value
+        self.hash = provided_hash
+    def __eq__(self, other):  # compare items based on their keys
+        return self.key == other.key
+    def __ne__(self, other):
+        return not (self == other)
+    def __lt__(self, other):  # compare items based on their keys
+        return self.key < other.key
+    def __str__(self):
+        return '<Entry: key={0} value={1}>'.format(self.key, self.value)
+
+Implémentation d'un dictionnaire : Un tableau trié (1/2)
+- Les éléments (couple composé de la clé et de la valeur) sont stockés dans un tableau. Les éléments sont triés selon la clé.
+- Une recherche dichotomique (approche diviser-pour-régner) permet de réduire la complexité de la recherche (O(log n)).
+
+Binary-Search(V, k, low, high)
+1  if low > high
+2      return NIL
+3  mid = floor((low+high)/2)
+4  x = Elem-At-Rank(V, mid)
+5  if k == x.key
+6      return x
+7  elseif k > x.key
+8      return Binary-Search(V, k, mid+1, high)
+9  else return Binary-Search(V, k, low, mid-1)
+
+Code Python équivalent (binary_search_recursive):
+def binary_search_recursive(array, element, start, end):
+    if start > end:
+        return -1
+    mid = (start + end) // 2
+    if element == array[mid]:
+        return mid
+    if element < array[mid]:
+        return binary_search_recursive(array, element, start, mid-1)
+    else:
+        return binary_search_recursive(array, element, mid+1, end)
+
+Implémentation d'un dictionnaire : Un tableau trié (2/2)
+- Insertion : recherche de la position par Binary-Search() puis insertion dans le vecteur par Insert-At-Rank qui nécessite un décalage des éléments vers la droite.
+- Suppression : recherche puis suppression par Remove-At-Rank() qui nécessite un décalage des éléments vers la gauche.
+- Complexité au pire cas :
+Implémentation      SEARCH     INSERT    DELETE
+Liste                Θ(n)       Θ(n)      Θ(n)
+Vecteur trié          Θ(log n)   Θ(n)      Θ(n)
+
+Implémentation d'un dictionnaire : Un tableau à accès direct
+- Le dictionnaire est implémenté par un tableau de taille N fixée contenant les éléments de l'ensemble.
+- Chaque position dans le tableau correspond à une clé (key=index)
+- S'il y a une valeur x avec la clé k, alors T[k] contient la valeur x, sinon T[k]=NIL
+
+Direct-Address-Search(T, k)
+1  return T[k]
+
+Direct-Address-Insert(T, x)
+1  return T[x.key] = x
+
+Direct-Address-Delete(T, x)
+1  return T[x.key] = NIL
+
+Implémentation d'un dictionnaire : Liste chaînée
+- Insertion (resp. suppression) :
+  - Il faut chercher la clé dans la liste
+  - Si elle existe, on remplace la valeur (resp. on la supprime)
+  - Si elle n'existe pas, on la place dans la tête de la liste (resp. on ne fait rien)
+- Recherche :
+List-Search(L, k)
+1  x = L.head
+2  while x != NIL AND x.key != k
+3      x = x.next
+4  return x
+
+Implémentation d'un dictionnaire avec BST : Arbre BST (ABR)
+- Exemple d'arbre binaire de recherche : racine 50, enfant gauche 17 (enfants 12,23 ; 12 a enfants 9,14 ; 23 a enfant 19), enfant droit 72 (enfants 54,76 ; 54 a enfant 67 (feuille)).
+- Structure de nœud : node x avec clé k=x.key, x.parent, x.left, x.right
+
+Implémentation d'un dictionnaire avec BST : insert(k, v)
+class BsTDict(object):
+    def __init__(self):
+        self.root: Node = None
+
+    def insert(self, key, value):
+        if self.root is None:
+            self.root = Node(key, value)
+        else:
+            self.attach(self.root, Node(key, value))
+
+    def attach(self, root, new_node):
+        if root is not None:
+            if root.entry.key <= new_node.entry.key:
+                if root.left_child:
+                    self.attach(root.left_child, new_node)
+                else:
+                    root.left_child = new_node
+            elif root.entry.key > new_node.entry.key:
+                if root.right_child:
+                    self.attach(root.right_child, new_node)
+                else:
+                    root.right_child = new_node
+
+Implémentation d'un dictionnaire avec BST : get(k)
+class BSTMap[K,V](compare:(K,K)=>Int) extends scala.collection.mutable.Map[K,V] {
+  class Node(var key: K, var value: V, var left: Node, var right: Node)
+  private var root: Node = _
+
+  def get(key: K): Option[V] = {
+    var rover = root
+    var c = if (rover != null) compare(key, rover.key) else 0
+    while (rover != null && c != 0) {
+      rover = if (c < 0) rover.left else rover.right
+      c = if (rover != null) compare(key, rover.key) else 0
+    }
+    if (rover == null) None else Some(rover.value)
+  }
+}
+
+Implémentation d'un dictionnaire : Comparaison de complexité des différentes implémentations
+- Dans les conditions extrêmes, ex. BST non balancé.
+- S'il est balancé, la profondeur de BST est égale à log n. Donc la complexité attendue de l'opération d'insertion est en O(log n)
+
+Opérations      Tableau non trié (keys)   Tableau trié (toujours)   Tableau à accès direct   Liste chaînée simple+head   BST non balancé
+put(k,v)         O(1)                       O(n) > shift               O(1) k=index              O(n)                          O(n)
+get(k)           O(n)                       O(log n)                   O(1) k=index              O(n)                          O(n)
+delete(k)        O(n) > shift                O(n) > shift                O(1)                       O(n) > find                   O(n)
+find(k)          O(n)                       O(log n)                   O(1)                       O(n)                          O(n)
+Is_empty()       O(1)                       O(1)                       O(1)                       O(1)                          O(1)
+length()         O(1)                       O(1)                       O(1)                       O(1)                          O(1)
+
+Références
+- https://opendsaserver.cs.vt.edu/ODSA/Books/CS3/html/Dictionary.html
+- https://slideplayer.com/slide/4560099/
+- https://gist.github.com/ourway/7fa9aefce098d6377a6d

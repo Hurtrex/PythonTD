@@ -1,0 +1,151 @@
+Analyse de complexité
+rouanehm@gmail.com
+
+Complexité des algorithmes
+- L'objet de la théorie de la complexité est de mesurer les ressources principalement le temps et la mémoire utilisées par un programme ou nécessaires à la résolution d'un problème.
+- Le but est de :
+  - Évaluer l'efficacité d'une méthode de calcul
+  - Comparer les méthodes de calcul entre elles indépendamment de l'environnement d'exécution (Machine, Compilateur, etc.)
+- La théorie de la complexité permet de formaliser proprement la notion d'algorithme, en complète généralité, en faisant abstraction du langage utilisé
+
+Structures algorithmiques
+- Structures de contrôle
+  - Séquence
+  - Embranchement (ou sélection)
+  - La boucle (ou itération)
+- Structures de données : support des informations
+  - Variables
+  - Constantes
+  - Tableaux
+  - Objets
+  - Structures récursives (listes, arbres, graphes)
+
+Notion de ressource élémentaire
+- On mesure toujours l'efficacité, c'est-à-dire la complexité, d'un algorithme en termes d'une mesure élémentaire à valeur entière.
+- Cela peut être :
+  - La taille de la mémoire utilisée
+  - Le nombre d'affectations effectuées
+  - Le nombre de comparaisons effectuées
+  - Ou toute autre mesure.
+
+Nombre d'opérations
+- Le nombre d'opérations élémentaires est calculé en fonction de :
+  - La taille des données (par ex. le nombre d'éléments à trier)
+  - La nature des données (provoquant par ex. la sortie d'une boucle)
+- Notations :
+  - n : taille des données,
+  - T(n) : nombre d'opérations élémentaires
+  - noté aussi C(n) : le coût de traitement de données de taille n.
+- Plusieurs catégories de complexité :
+  - Au pire cas (par défaut quand on aborde la complexité)
+  - Au cas moyen (quand on connait la distribution des données d'entrée)
+  - Au meilleur cas
+
+Ordre constant
+- Le temps de calcul ne varie pas avec la taille des données en entrée.
+  - C(n)=C(n+1) : que l'on traite des données de taille n ou de taille supérieure, le temps de calcul est le même.
+- Noté O(1)
+- Exemples :
+  - L'accès à tableau[3] est une opération en O(1), car le temps nécessaire pour la réaliser ne dépend pas de la longueur du tableau. Il s'agit d'une opération simple et directe, peu importe que le tableau contienne 5 items ou 5 millions d'items
+  - L'ajout ou la suppression d'un élément à la fin d'une collection
+
+Calcul du nombre d'opérations
+- La séquence : on prend la somme des coûts
+- Embranchement : on prend le max des coûts dans les branches
+- Boucle : on prend la somme des coûts des passages successifs
+- Fonction récursive : équation récursive
+
+Exemple de fonction récursive :
+si (n > 1) alors
+    FonctionRecursive(n/2),      coût T(n/2)
+    Traitement(n),               coût C(n)
+    FonctionRecursive(n/2),      coût T(n/2)
+T(n) = 1 + 2 × T(n/2) + C(n)
+
+Formules générales:
+- Séquence : Traitement1 T1(n), Traitement2 T2(n) => T(n) = T1(n) + T2(n)
+- Si <condition> alors Traitement1 T1(n) sinon Traitement2 T2(n) => T(n) = Tc(n) + max(T1(n), T2(n))
+- Tant que <condition> faire Traitement => T(n) = somme_{i=1}^{k} (Ci(n) + Ti(n)) + Ck+1(n)
+
+Complexité asymptotique et ordre de grandeur (quand n tend vers l'infini)
+- On s'intéresse le plus souvent à l'ordre de grandeur (l'asymptotique) des complexités quand la taille n des entrées devient très grande.
+- Exemple : linéaire, quadratique, exponentiel, etc.
+
+Exemples:
+T(n) = n^3 + 2n^2 + 4n + 2 = O(n^3)
+T(n) = n log n + 12n + 2 = O(n log n)
+T(n) = 2n^10 + n^7 + 12n^4 + 2^n/100 = O(2^n)
+
+Classes de complexité usuelles
+O(log n)   logarithmique
+O(n)       linéaire
+O(n^2)     quadratique, polynomial
+O(n^3)     cubique, polynomial
+O(2^n)     exponentiel (problèmes très difficiles)
+Vidéo: https://www.youtube.com/watch?v=MyeV2_tGqvw
+
+Classement des ordres de grandeurs
+1, log(n), n, n log(n), n^2, n^3, n^4, ..., 2^n, 3^n, 4^n, ..., n!, n^n
+Une exponentielle de base b supérieure à 1 arrive toujours à dépasser un polynôme p(n), même si la base est très près de 1 et le degré du polynôme est très grand : p(n) est O(b^n)
+
+Ordre de grandeur et temps d'exécution
+- Le temps d'exécution est proportionnel à l'ordre de grandeur du nombre d'instructions élémentaires.
+- Pour une machine qui effectue 1 million de traitements par seconde :
+
+Complexité      n=10    n=30    n=50      n=100      n=1000    n=10000   n=100000  n=1000000
+n               <1s     <1s     <1s       <1s        <1s       <1s       <1s       1s
+n log2 n        <1s     <1s     <1s       <1s        <1s       <1s       2s        20s
+n^2             <1s     <1s     <1s       <1s        1s        2 min     3 heures  12 jours
+n^3             <1s     <1s     <1s       1s         18 min    12 jours  32 ans    31710 ans
+(3/2)^n         <1s     <1s     11 min    12,9 ans   ∞         ∞         ∞         ∞
+2^n             <1s     18 min  36 ans    10^17 ans  ∞         ∞         ∞         ∞
+n!              4s      10^25 ans  ∞      ∞          ∞         ∞         ∞         ∞
+
+Calcul de complexité — Exemples
+
+Permutation dans un tableau:
+fonction Permutation(S, i, j)
+1  tmp := S[i],       coût c1
+2  S[i] := S[j],       coût c2
+3  S[j] := tmp,        coût c3
+4  renvoyer S          coût c4
+T(n) = c1 + c2 + c3 + c4 = O(1)
+
+Recherche séquentielle:
+fonction Recherche_sequentielle(x, S[1,...,n])
+1  i := 1,                                     (c1)
+2  tant que ((i < n) et (S[i] ≠ x)) faire       (c2)
+3      i := i + 1,                              (c3)
+4  renvoyer (S[i] = x)                          (c4)
+T(n) = c1 + c2 + sum_{i=1}^{n}(c3 + c2) + c4 = O(n)
+
+Tri à bulles:
+fonction Tri_a_bulles(S[1,...,n])
+1  pour i := n à 2 faire
+2      pour j := 1 à i-1 faire
+3          si (S[j] > S[j+1]) alors
+4              Permuter(S, j, j+1),
+T(n) = (1 + Cperm) × sum_{i=1}^{n-1} i = (1 + Cperm) × n×(n-1)/2 = O(n^2)
+
+Calcul de complexité — pire cas
+- Si on ne sait rien sur les données, on considère la vision pessimiste des choses : cela revient à évaluer la complexité dans le pire des cas
+- En pratique, le pire cas est rarement atteint
+
+Exemple : calcul du maximum d'une liste d'entiers e1,...,en (n≥1), M = max(ei). Code Python (find_max) et Java (max) équivalents, tous deux en O(n).
+
+Ordre de grandeurs de certaines tâches usuelles
+O(1)        Accès direct à un élément
+O(log n)    Divisions successives par deux d'un ensemble
+O(n)        Parcours d'un ensemble
+O(n log n)  Divisions successives par deux et parcours de toutes les parties
+O(n^2)      Parcours d'une matrice carrée de taille n
+O(2^n)      Génération des parties d'un ensemble
+O(n!)       Génération des permutations d'un ensemble
+
+Que faire face à un problème intraitable ?
+- Un problème NP-complet :
+  - NP : Non-deterministic Polynomial time
+  - très longs à résoudre
+  - Ex. « Existe-t-il un trajet de longueur ≤ 500 km qui visite toutes les villes une fois ? »
+- Une question à un million 1 000 000 $
+  - Le fait qu'à ce jour aucun des problèmes NP-complets n'ait été résolu en temps polynomial nous porte à croire que cela est impossible. Mais l'impossibilité de les résoudre en temps polynomial n'a pas été démontrée. Cette question ouverte constitue d'ailleurs un des 7 problèmes du millénaire pour chacun desquels un million de dollars est offert en récompense par le Clay Mathematics Institute of Cambridge.

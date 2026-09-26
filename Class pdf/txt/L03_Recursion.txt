@@ -1,0 +1,218 @@
+Récursivité dans les
+   algorithmes
+     rouanehm@gmail.com
+Récursion (Récursivité)
+• Types de récursion
+   • Récursion fonctionnelle (ou numérique)
+   • Récursion structurelle
+• Objet récursif :
+   • Un objet défini à partir de lui-même.
+• Fonction récursive
+   • Une fonction est récursive si elle peut s'appeler elle-même de façon directe
+     ou indirecte.
+   • Il y a une forte analogie avec les maths : (n + 1)! = (n + 1) × n!
+       Récursion structurelle:
+       Un exemple
+
+
+
+
+https://algorithmtutor.com/Data-Structures/Tree/Binary-Search-Trees/   https://www.techiedelight.com/insertion-in-bst/
+Récursion fonctionnelle:
+Un exemple
+
+
+
+
+ https://www.techiedelight.com/determine-given-binary-tree-is-a-bst-or-not/   https://www.techiedelight.com/insertion-in-bst/
+Utilité de la récursion
+• Certains problèmes en informatiques
+  sont de nature récursive
+   • Ne peuvent pas être résolus sans
+     récursion
+   • Ex.: définir le concept de ‘ancêtre’
+      • Les parents sont des ancêtres
+      • Les ancêtres des parents sont des ancêtres
+• Certains problèmes peuvent être
+  formulés de façon plus concise et
+  claire avec récursivité
+                                                     https://www.programiz.com/dsa/graph-dfs#python-code
+Traitement de la récursivité fonctionnelle :
+La pile d’exécution (1)
+• Les piles sont des structures qui
+  peuvent contenir plusieurs éléments.
+  Toutefois, seul le dernier élément
+  ajouté à la pile est accessible.
+• Lorsqu'une fonction est appelée, ses
+  paramètres formels, l'adresse de retour
+  et les variables locales (automatiques)
+  de la fonction appelée sont déposés
+  sur la pile. Toutes ces données sont
+  retirées de la pile à la fin de l'exécution
+  de la fonction. Conséquemment, lors
+  d'appels récursifs, les variables de la
+  fonction sont empilées en cascade.
+Traitement de la récursivité fonctionnelle :
+La pile d’exécution (2)
+
+                       https://www.freecodecamp.org/news/how-recursion-works-
+                       explained-with-flowcharts-and-a-video-de61f40cb7f9/
+Traitement de la récursivité fonctionnelle :
+La pile d’exécution (2)
+                       https://www.freecodecamp.org/news/how-recursion-works-
+                       explained-with-flowcharts-and-a-video-de61f40cb7f9/
+Traitement de la récursivité fonctionnelle :
+La pile d’exécution (2)
+                        https://www.freecodecamp.org/news/how-recursion-works-
+                        explained-with-flowcharts-and-a-video-de61f40cb7f9/
+Traitement de la récursivité fonctionnelle :
+La pile d’exécution (2)
+                        https://www.freecodecamp.org/news/how-recursion-works-
+                        explained-with-flowcharts-and-a-video-de61f40cb7f9/
+Principes de l’approche récursive (1)
+• La fonction est partiellement
+  définie par elle-même
+• Décomposition du problème :
+   • On connaît certaines réponses
+     (simples)
+      • Ex.: 0!=1
+   • On sait comment décomposer un
+     cas complexe en cas moins
+     complexe
+      • Ex.: n! = n * (n-1) !
+Principes de l’approche récursive (2)
+• La réalisation d'une tâche par un
+  algorithme récursif repose sur deux
+  éléments :
+   • La résolution partielle du problème d'une
+     façon simple.
+       • Ex. 0!=1
+   • La réalisation du reste de la tâche étant
+     déléguée aux appels récursifs successifs.
+       • EX. n! = n * (n-1)!
+   • La détermination d'une condition d'arrêt
+     qui permet d'arrêter la cascade d'appels
+     récursifs.
+       • Ex. if(n=1) n!=1
+Principes de l’approche récursive (3):
+Illustration des principes
+
+
+
+
+https://www.freecodecamp.org/news/ho
+w-recursion-works-explained-with-
+flowcharts-and-a-video-de61f40cb7f9/
+Schéma général d’un algorithme récursif
+Quelques applications de la récursion
+• La plupart des problèmes (ex. le tri fusion
+  d’un tableau), le calcul d’une équation (ex.
+  la taille d’un dossier sur le disque), etc.,
+  peuvent être résolus de façon récursive
+• Structures de données définies
+  récursivement (listes, arbres, graphes, etc.)
+• Équations de récurrence (algébriques,
+  vectorielles, booléennes, formelles,
+  ensemblistes, etc.);
+Avantages et inconvénients de la récursivité
+• Avantages:
+   • Formulation compacte, claire et élégante.
+   • Maîtrise des problèmes dont la nature même est récursive.
+• Inconvénients:
+   • Possibilité de grande occupation de la mémoire.
+   • Temps d'exécution peut être plus long.
+   • Estimation difficile de la profondeur maximale de la récursivité.
+Exemples de récursivité:
+Suite de Fibonacci
+• La suite de Fibonacci est
+  une suite de nombres
+  entiers dans laquelle
+  chaque terme est la somme
+  des deux termes qui le
+  précèdent
+• Une fonction de nature
+  récursive car la valeur de
+  fib(n) dépend de fib(n-1) et
+  fib(n-2)
+Exemples de récursivité:
+Suite de Fibonacci
+• Cas simple
+   • Problème directement solvable
+   • Pas de récursion
+• Cas récursif (cas complexe)
+   • Appel à la même fonction pour des cas plus simples
+   • n-1, n-2 sont plus simples que n
+Exemples de récursivité:
+Suite de Fibonacci (récursion versus itération)
+• Pour fib(46), la solution récursive
+  prend 19 secondes, alors que le même
+  résultat est obtenu en moins d’une
+  milliseconde avec l’implémentation
+  itérative ! (AMD Athlon64 3000+).
+• Cette fonction récursive effectue
+  plusieurs appels au même calcul. Par
+  exemple pour déterminer f(n), on
+  calcule d’abord f(n-1), puis au retour
+  de l’appel, f(n-2) est calculé. Or, dans le
+  calcul de f(n-1), f(n-2) est déjà calculé.
+• Programmation dynamique: ne jamais
+  dupliquer le travail par la résolution
+  d’une même instance d’un problème
+  dans plusieurs appels récursifs.
+Exemples de récursivité:
+Somme de n premiers entiers positifs
+• Calculer la somme des n premiers
+  entiers : si je sais le faire pour n, je sais
+  le faire pour n+1 :
+   • S(n + 1) = (n + 1) + S(n)
+Exemples de récursivité:
+Factorielle d’un entier positif
+
+
+
+
+          http://www.trytoprogram.com/python-programming/python-recursive-function/
+Exemples de récursivité:
+Parcours d’un tableau (1/2)
+• Problème initial: traverser le tableau à partir de l’indexe 0 (jusqu’à la fin)
+• Le problème est décomposable ?
+   • Pour traverser à partir de l’indexe i
+      • Traverser l’élément courant i
+      • Traverser le reste du tableau – à partir de i+1
+   • Attention: condition d’arrêt!
+      • Traverser le reste – à partir de i+1 (si il en reste)
+• Structure de la méthode traverser(i, tableau)
+      • Traiter l’élément à la position i
+      • Si non à la fin du tab, traverser(i+1, tableau)
+Exemples de récursivité:
+Parcours d’un tableau (2/2)
+• Deux types de parcours :
+   • Croissant
+   • Decroissant
+Exemples de récursivité:
+Calcul du taux d’intérêt composé
+• Dit composé car l’intérêt est calculé en fonction du ​montant initial en
+  plus des intérêts accumulés à la fin de chaque période de
+  capitalisation.
+• A: capital cumulé
+• P: capital initial investi
+• r: taux intérêt
+• n: nombre de périodes de capitalisation par année
+• t: nombre d’années d’investissement
+• Codez cet exemple
+https://hackernoon.com/recursion-vs-looping-in-python-9261442f70a5
+Récursion versus itération :
+
+
+• La récursivité est légèrement moins rapide qu’un algorithme itératif
+  équivalent
+   • Temps nécessaire à l ’empilage et au dépilage des données
+   • Les résultats intermédiaires sont gardés sur la pile d’exécution
+   • Ex.: Factoriel est mieux implanté itérativement
+• La récursivité est plus « élégante »
+• Les algorithmes récursifs sont souvent plus faciles à écrire
+Références
+• https://www.techiedelight.com/list-of-problems/
+• https://algorithmtutor.com/Data-Structures/Tree/Binary-Search-Trees/
+• https://hackernoon.com/recursion-vs-looping-in-python-9261442f70a5
+

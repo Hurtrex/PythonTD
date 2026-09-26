@@ -1,0 +1,364 @@
+Langage Python pour les
+programmeurs Java et C#
+       rouanehm@gmail.com
+Python
+• Un langage de programmation multiparadigme.
+• Né en 1990
+• Dernière version 3.8 (Mai 2020)
+• Multiplateformes
+• Architectures variées: Desktop, Web (Flask, Django)
+  et Mobile (Flutter, Kivy, BeeWare)
+• Python developers are in extensive demand in
+  diverse industries such as machine learning,
+  databases, cloud infrastructure, design, data
+  analysis, webpage reliability/testing, web scraping,
+  security, mobile development, etc.
+  Position de Python :
+  The fastest-growing major programming language (Stackoverflow)
+
+
+
+
+                                                                  Salaire moyen développeur Python au Canada: 75K$
+                                                                       https://neuvoo.ca/salaire/?job=Developpeur%20Python
+https://stackoverflow.blog/2017/09/06/incredible-growth-python/
+Quelques utilisateurs de Python
+IDE Python
+• PyCharm (Jetbrains, IntelliJ IDEA) – IDE officiel du cours –
+    • https://www.youtube.com/watch?v=56bPIGf4us0
+    • https://www.youtube.com/watch?v=Jt0fNgJr400
+• Spyder
+    • https://www.spyder-ide.org/
+• Sublime Text 3
+    • https://www.sublimetext.com/3
+• Atom
+    • https://atom.io/packages/ide-python
+• VS Code
+    • https://code.visualstudio.com/docs/languages/python
+• Online Compilers
+    • https://www.programiz.com/python-programming/online-
+      compiler/
+Structure d’un projet Python
+Le module
+• Module: un fichier de code Python
+• Un module peut contient plusieurs classes
+  ou simplement des fonctions.
+• Pour utiliser les définitions déjà faites, il
+  faut utiliser le mot-clé import.
+Structure d’un projet Python:
+Importer un module
+• Python lui-même est bâti sur des centaines de
+  modules qui réalisent diverses tâches (math,
+  re, os, time, urllib, etc.) qui sont préinstallés.
+• Pour utiliser un module, il faut l’importer.
+• On peut importer un élément spécifique d’un
+  module ou tous les éléments d’un module.
+• Il est possible de définir un alias pour un
+  module afin de raccourcir son nom ou lui
+  donner un nouveau nom significatif dans son
+  propre code.
+• Pour vider de la mémoire d’un module déjà
+  chargé, on peut utiliser l’instruction del.
+Structure d’un projet Python:
+Ajouter un fichier __init_.py
+• Un Package Python est un répertoire qui
+  contient un ensemble de modules Python.
+  Rappelez-vous, un module est tout
+  simplement un fichier d’instructions Python.
+• Ajouter un fichier __init__.py dans un
+  répertoire Python permet d’importer tous les
+  modules indiqués dans ce fichier ce qui
+  réduit le nombre d’imports que l’on pourrait
+  mettre au début d’un module.
+
+
+
+
+                  https://timothybramlett.com/How_to_create_a_Python_Package_with___init__py.html
+La classe
+• From/import pour inclure
+  d’autres définitions de
+  classes ou de code.
+• Mot clé self est équivalent à
+  Java this
+• Héritage est indiqué avec le
+  nom de la classe et peut être
+  multiple.
+• Fonction __int__ est le
+  constructeur. On peut
+  surcharger le constructeur.
+• Les variable précédés par
+  self dans __init__ sont des
+  variable d’instance.
+• Les variables hors __init__
+  sont des variables de classe.
+La classe:
+Les modificateurs d’accès
+• Comme tout langage de POO, Python
+  possède les trois modes d’accès public,
+  protected (_) et private (__). Les noms
+  des membres privés et protégés
+  commencent par _/__ mais ne se
+  terminent pas avec ces symboles (à
+  l’instar des dunder methods)
+Méthode de l’instance
+• Mot-clé self est présent parmi les
+  paramètres.
+• Symbol -> pour retourner un
+  résultat.
+• Les paramètres peuvent être typés
+  (typage statique) ou non typés
+  (typage dynamique)
+• Accès aux variables d’instance
+  avec le mot-clé self.
+• La variable qui n’est pas précédée
+  par self est locale.
+• Une fonction peut retourner plus
+  d’un résultat (un tuple)
+• Les paramètres peuvent avoir une
+  valeur par défaut.
+• On peut affecter dynamiquement
+  une méthode à une classe.
+Méthode de classe (statique)
+• Deux façons pour associer une méthode
+  statique à une classe :
+     • L’annotation @classmethod : la méthode de
+       classe (statique) doit être annotée avec le
+       décorateur @classmethod et avoir comme
+       premier paramètre cls.
+     • De façon dynamique en affectant une fonction à
+       une classe avec l’instruction
+       classmethod(theMethod)
+
+
+
+
+https://www.studytonight.com/python/python-static-keyword
+Dunder methods:
+__init__
+• Python ne supporte pas la
+  surcharge (Overloading) des
+  fonctions. C’est toujours la dernière
+  définition de la fonction qui est
+  retenue (Overriding).
+• Toutefois, une fonction peut avoir
+  un nombre variable de paramètres.
+• Ne pas confondre __int__ et                https://www.geeksforgeeks.org/__new__-in-python/
+  __new__. La fonction __new__ est
+  appelée quand l’objet est crée alors
+  que __init__ est appelée pour
+  initialiser cet objet. cls représente la
+  classe qui besoin d’être instanciée.
+Dunder methods:
+__repr__ et __str__
+• __repr__ redéfinit la chaine de
+  caractères obtenue lorsqu’on
+  sérialise l’objet.
+• __str__ donne aussi une
+  représentation en chaine de
+  caractères d’un objet.
+
+
+
+
+                                    https://www.geeksforgeeks.org/str-vs-repr-in-python/
+Dunder methds:
+__del__ et __delete__
+• __del__ est le destructeur. Cette méthode
+  est appelé avec l’instruction del ou
+  automatiquement par le GC quand le
+  nombre de références à l’objet est nul.
+• _delete__ permet d’effacer une variable
+  d’une classe
+Dunder methods:
+Comparaison des objets
+• __cmp__ n’est plus présente dans
+  Python 3
+• Avec le décorateurde classe
+  functools.total_ordering, il suffit de
+  définir deux Dunder méthodes:
+  __eq__ (resp. __ne__) et l’une des
+  autres Dunder de comparaison
+  (__lt__, __le__, __gt__, __ge__).
+Méthodes particulières de la classe:
+__dict__ et vars
+• Tout objet a un attribut __dict__ qui contient tous les attributs de
+  l’objet avec les valeurs associées sous la forme d’un dictionnaire.
+• La fonction vars() retourne ce dictionnaire.
+Héritage
+• Python offre
+  héritage multiple.
+• Toute les classe
+  héritent par défaut
+  de la classe object.
+  Indiquer la classe
+  object est
+  facultatif.
+• Il n’y a pas de
+  différence dans la
+  déclaration entre
+  dériver une classe
+  et implémenter
+  une interface.
+docstrings
+• La chaîne de caractères entre
+  triple guillemets située au
+  début d’un module, une classe
+  ou d’une fonction.
+• Docstring est stockée dans un
+  attribut __doc__ que l’on peut
+  utiliser pour récupérer cette
+  chaîne.
+• Les docstrings permettent
+  notamment de fournir de l’aide
+  lorsqu’on invoque la commande
+  help().
+
+                                   https://www.programiz.com/python-programming/docstrings
+Styles de docstrings
+   Les collections Python :
+   la liste
+   • Python autorise la construction de liste
+     contenant des valeurs de types différents.
+   • Les indices d'une liste de n éléments
+     commence à 0 et se termine à n-1.
+   • La liste peut également être indexée avec
+     des nombres négatifs
+   • On peut sélectionner une partie d'une
+     liste en utilisant un indiçage construit sur
+     le modèle [m:n+1] pour récupérer tous les
+     éléments, du émième au énième (de
+     l'élément m inclus à l'élément n+1 exclu).
+   • On peut aussi préciser le pas en ajoutant
+     un symbole deux-points supplémentaire
+     et en indiquant le pas par un entier.
+   • Plusieurs méthodes applicables: len, min,
+     max, sum, append, etc.
+https://www.engineeringbigdata.com/python-lists-programming-in-python/
+Les collections Python :
+Trier une liste d’objets
+• Le tri est réalisé par la méthode
+  membre sort ou la fonction sorted.
+• La méthode sort prend deux
+  paramètres : l’ordre et une fonction
+  de tri.
+• L’ordre par défaut est ascendant
+• La fonction de tri peut être écrite
+  comme une fonction Python
+  ordinaire ou sous la forme lambda.
+Trier une liste d’objets (sorted)
+         Les collections Python :
+         l’ensemble
+         • Une collection de données
+           qui ne sont ni indexés ni
+           ordonnés et sont écrits avec
+           des accolades ({}).
+
+
+
+         • Plusieurs méthodes telles
+           que: len, add, update,
+           remove, discard, etc.
+
+
+https://www.engineeringbigdata.com/python-sets-programming-in-python/
+Les collections Python :
+le dictionnaire
+• Si on a besoin d’une structure de données séquentielles ou si on veut donner des
+  noms aux variables (plutôt qu’un indice), utilisez plutôt les dictionnaires.
+• Une collection de clé-valeur
+• Trois façons pour créer un dictionnaire comme illustré ci-bas.
+Les collections Python :
+le tuple
+• Les tuples (« n-uplets » en français) correspondent aux listes à la
+  différence qu’ils sont non modifiables. Ils utilisent les parenthèses au
+  lieu des crochets.
+• On peut construire un tuple à partir d’une liste avec tuple([e1, e2, …])
+• On peut construire un tuple directement avec (e1, e2, …)
+Les itérateurs :
+
+• Un itérateur est un objet qui contient un
+  nombre dénombrable de valeurs. Il peut
+  être itéré, ce qui signifie que vous pouvez
+  parcourir toutes les valeurs.
+• En Python, un itérateur est un objet qui
+  implémente le protocole d'itérateur
+  composé des trois méthodes __init(),
+  __next __ () et __iter __ ().
+• On peut appliquer ce protocole à
+  n’importe quel conteneur ayant des
+  valeurs/objets.
+Les exceptions
+• Si une exception se produit, mais que la clause except dans le code ne la
+  gère pas, elle est transmise aux instructions try externes. Si l'exception
+  n'est pas gérée, l'exécution s'arrête.
+• L'instruction raise permet de forcer une exception spécifique à se produire.
+
+
+
+
+                    https://www.geeksforgeeks.org/python-set-5-exception-handling/
+Notions Python supplémentaires:
+Tests des valeurs sur des floats
+• Les valeurs de float ne peuvent
+  être qu’approchées. Une manière
+  de s’en rendre compte est
+  d’utiliser l’écriture formatée en
+  demandant l’affichage d’un
+  nombre variable de décimales.
+• Il ne faut surtout pas tester si un
+  float est égal à une certaine
+  valeur.
+• La bonne pratique est de vérifier
+  si un float est compris dans un
+  intervalle avec une certaine
+  précision. Si on appelle cette
+  précision delta, on peut procéder
+  comme illustrer ci-contre
+Notions Python supplémentaires:
+manipuler une chaine de caractères
+• Considérée comme une liste non modifiable de caractères (Java String)
+• Peut être manipuler avec l’opérateur []
+   • [3] est le 3ème caractère dans la chaine.
+   • [-3:] les trois derniers caractères
+   • [0:4] les 4 premiers caractères
+   • [9:] les caractères à partir de la 9ème position jusqu’à la fin
+   • [:-2] tous les caractères de la chaine sauf les deux derniers caractères
+   • [0:] = [:len(name)] la chaine entière
+• Les fonctions int(), float(), str() permettent de passer d’un nombre vers
+  une chaine de caractères et vice versa.
+     Notions Python supplémentaires:
+     manipuler une chaine de caractères
+
+
+
+
+https://www.brainkart.com/article/Built-in-String-functions_37258/
+Notions Python supplémentaires:
+f-strings (depuis 3.6)
+• Permettent de formatter une chaine de caractères.
+• f-string utilise le prefix f’ et une expression entre {} à évaluer.
+    Notions Python supplémentaires
+    Avoir plusieurs constructeurs
+
+
+
+
+https://www.programiz.com/python-programming/methods/built-in/classmethod   https://www.studytonight.com/python/constructors-in-python
+Conventions de nommage
+Top 10 Python modules
+• NumPy (calcul numérique)
+• Pendulum (manipulation des dates et du temps)
+• Python Imaging Library
+• MoviePy (video editing)
+• Requests ( HTTP requests)
+• Tkinter (Tk GUI toolkit)
+• PyQt (cross-platform GUI toolkit Qt)
+• Pandas (data analysis and manipulation tool)
+• Pywin32 ( Windows API functions)
+• Pytest (Unit testing)
+Références
+• https://realpython.com/
+• https://www.programiz.com/python-programming
+• http://zetcode.com/lang/python/
+

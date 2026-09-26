@@ -1,0 +1,315 @@
+     Implémentation d’un
+dictionnaire avec une table de
+           hachage
+         rouanehm@gmail.com
+Principe d’une table de hachage:
+• La table de hachage (hash table, hash
+  map) est une structure de données qui
+  implémente un TAD dictionnaire
+  (tableau associatif), une structure qui
+  (map) fait correspondre des clés à des
+  valeurs.
+• Une table de hachage utilise une
+  fonction de hachage pour calculer un
+  index, également appelé code de
+  hachage, dans un tableau de
+  compartiments ou d'emplacements
+  (buckets or slots), à partir duquel la
+  valeur associée à la clé peut être
+  retrouvée.
+• The values returned by a hash function are called hash values, hash
+  codes, hash sums, or simply hashes.
+Fonction de hachage :
+Définition
+• Inventée en 1953 par Luhn
+• Idéalement, la fonction de
+  hachage associe chaque clé à une
+  position unique dans un tableau
+  de stockage.
+• La plupart des hash tables
+  utilisent une fonction de hachage
+  imparfaite, ce qui peut conduire
+  à des collisions entre plusieurs
+  clés qui ont un même code de
+  hachage (les détails plus loin).
+                                      https://en.wikipedia.org/wiki/Hash_function
+Fonction de hachage :
+Le principe
+• Principe :
+   • Utiliser une table T de taille n << |U| (U est le domaine/univers des clés)
+   • Stocker l’élément x a la position h(x.key), ou h est une fonction de hachage :
+
+• Une fonction de hachage
+  est une fonction h qui,
+  pour chaque élément x de
+  l’ensemble, calcule une
+  valeur h(x.key) comprise
+  entre 0 et N-1
+  correspondant à un indice
+  du tableau de dimension N.
+Modèles de fonctions de hachage :
+Selecting digits
+• Select a portion of the key to use
+  as the index into the hash table
+• Works only for keys that are
+  positive integers
+• Exemple:
+
+• Le contre :
+   • The mapping of key to an index is quick
+   • It usually does not evently distribute items through the hash table (may lead
+     to many collisions or clustering around certain parts of the hash table)
+Modèles de fonctions de hachage :
+Folding
+• Une amélioration de la méthode de
+  sélection de chiffres car le la clé est
+  entièrement utilisée. Le domaine des
+  clés possibles est limité.
+• Une amélioration serait de faire la
+  somme de groupe de chiffres de la
+  clé:
+   • 4032109455 --> 33
+   • 4032109455 --> 4+ 032 + 109 + 455 ->
+     600
+• Une autre amélioration serait la
+  somme des chiffres impairs ou encore
+  la multiplication de tous les chiffres
+  suivie d’un décalage de bits.
+Modèles de fonctions de hachage :
+Modular Arithmetic
+• pour assurer une
+  répartition uniforme
+  des clés sur les
+  différentes régions
+  de la table de
+  hachage, il est
+  conseillé que la
+  taille de cette table
+  soit un nombre
+  premier (ex. 101)
+Fonction de hachage:
+Codage des chaines de caractères
+• Les fonctions de hachage supposent que les clés sont des nombres
+  naturels. Si ce n'est pas le cas, il faut :
+   • Préalablement utiliser une fonction d’encodage pour obtenir une clé
+   • Utiliser un des algorithmes présentés pour trouver le hash code
+• Exemple : codage des chaînes de caractères :
+   • On interprète la chaîne comme un entier dans une certaine base
+   • Exemple pour « SDA» : valeurs ASCII (128 possibles) :
+      • S=83, D=68, A=65
+      • Interprété comme un entier : (83 x 1282) + (68 x 1281) + (65 x 1280) = 1368641
+Fonction de hachage:
+Codage des chaines de caractères (suite)
+    • Une bonne fonction de hachage doit calculer rapidement une    0
+      valeur (O(1)) mais aussi diminuer le nombre de collisions.
+    • Exemple: Étant donné un tableau de taille N, la fonction de   1
+      hachage pour un ensemble dont les éléments sont des
+      chaînes de caractères :                                       2
+
+    h(chaîne) = (( codes de caractères) mod N )                    3
+
+chaîne        h(chaîne)                                             4
+
+Jean           7                                                    5   Jacques
+Jacques        5                                                    6   Vincent, Pierre
+Vincent        6                                                    7   Jean
+
+Lucien         9                                                    8
+                                                                        Lucien
+Pierre         6                                                    9
+Fonction de hachage:
+Une bonne fonction de hachage
+• To achieve a good hashing mechanism, It is important to have a good
+  hash function with the following basic requirements:
+   • It should be as uncomplicated as possible and fast to compute and must not
+     become an algorithm in itself, e.g., a single mathematical or bitwise operation.
+   • Uniform distribution: It should provide a uniform distribution across the hash
+     table and should not result in clustering.
+   • Less collisions: Collisions occur when pairs of elements are mapped to the
+     same hash value. These should be avoided.
+      • Irrespective of how good a hash function is, collisions are bound to occur.
+      • Typically not possible because all of the keys are not known in advance
+Collision :
+Définition
+• Collision : lorsque deux clés distinctes
+  k1 et k2 donne la même position dans
+  le tableau de stockage avec la fonction
+  de hachage h : h(k1) = h(k2)
+• Cela se produit toujours lorsque le
+  nombre de clés observées est plus
+  grand que la taille m du tableau T :
+   • |K| > m
+• Très probable, même lorsque la
+  fonction de hachage repartit les clés
+  uniformément.
+Résolution de la collision:
+Deux familles d’algorithmes
+• La hash table possède un tableau interne qui stocke les valeurs des clés.
+• La notion d’adresse signifie la position à laquelle la valeur sera stockée.
+• Open hashing/Closed addressing/separate chaining : Aucune valeur n’est
+  stockée dans le tableau interne, mais plutôt dans une structure auxiliaire
+  (appelée aussi Bucket), ex., une liste séparée (séparée du tableau interne). Le
+  terme ‘Open’ fait référence à la liberté de quitter le tableau interne pour stocker
+  les valeurs associées aux différentes clés. Le terme ‘Closed’ signifie qu’il est pas
+  autorisé de replacé la valeur dans un autre endroit du tableau interne.
+• Closed hashing/Open addressing: le tableau interne est la seule structure de
+  stockage. Chaque valeur est stockée dans le tableau interne. Ceci est possible
+  seulement si on autorise un certain adressage ouvert (Open adressing) qui
+  permet de trouver, s’il y a collision, une autre place dans le tableau interne à la
+  nouvelle valeur ajoutée.
+Résolution de la collision:
+Deux familles d’algorithmes
+• Gestion par Open hashing/closed
+  addressing
+   • Separate (external) chaining
+   • Buckets
+• Gestion par Closed Haching /Open
+  Addressing
+   • Linear probing
+   • Quadratic probing
+   • Double hashing
+   • Augmentation de la dimension du tableau
+     si taux occupation > 90%: re-hashing
+Résolution de la collision:
+Hachage ouvert (Separate Chaining)
+ • En cas de collision, le tableau
+   est «ouvert» vers la droite.
+    • Ex. les éléments sont placés
+      dans une liste (simple ou
+      double).
+ • Inconvénient: plus il y a de
+   collisions, plus les listes
+   deviennent longues et moins
+   la recherche est efficace.
+Résolution de la collision:
+Code de hachage ouvert – put
+
+
+
+
+                               https://www.geeksforgeeks.org/implement
+                               ation-of-hashing-with-chaining-in-python/
+Résolution de la collision:
+Code de hachage ouvert – get/remove
+Résolution de la collision:
+Exemple de hachage ouvert
+ Let us consider a simple hash
+ function as “key mod 7” and
+ sequence of keys as 50, 700, 76,
+ 85, 92, 73, 101
+
+
+
+
+ https://csrgxtu.github.io/2020/04/21/Python-
+ Dict-a-new-implementation-by-pure-Python/
+Résolution de la collision:
+Complexité des opérations de l’hachage ouvert
+• Comme il y a une liste simple
+  pour chaque clé qui s’occupe de
+  stocker les différentes valeurs
+  associées à cette clé, la
+  complexité des opérations de
+  base (insertion, recherche et
+  suppression) sont toutes en O(n).
+• On peut diminuer cette
+  complexité si l’on choisisse une
+  représentation moins couteuse
+  qu’une simple liste (liste triée,
+  etc.)
+Résolution de la collision:
+Hachage fermé – Linear Probing
+• Principe : on cherche la prochaine place libre dans le tableau pour accueillir
+  la nouvelle valeur.
+• La séquence de recherche est :
+   • 1er probe: h(k) mod table_size
+   • 2ème h(k)+f(1) mod table_size
+   • 3ème h(k)+f(2) mod table_size
+   • Etc.
+• Linear probing : f(i) = i
+• Quadratic probing : f(i) = i2
+
+• Note: Une longue séquence de
+  probes peut être couteuse.
+Résolution de la collision:
+Hachage fermé – Linear Probing
+• On cherche à replacer
+  l’élément en collision
+  ailleurs dans le tableau en
+  appliquant une fonction de
+  re-hachage qui calcule un
+  nouvel indice et ceci
+  jusqu’à ce que la nouvelle
+  entrée soit libre. Ce choix
+  conduit à une dégradation
+  des performances dès que
+  le taux de remplissage de la
+  table dépasse 90%.
+Résolution de la collision:
+Code de hachage fermé
+Linear Probing – put
+Résolution de la collision:
+Code de hachage fermé
+Linear Probing – get/remove
+Résolution de la collision:
+Exemple de hachage fermé
+ Let us consider a simple hash
+ function as “key mod 7” and
+ sequence of keys as 50, 700, 76, 85,
+ 92, 73, 101.
+
+
+
+
+    https://www.geeksforgeeks.org/
+    hashing-set-3-open-addressing/
+Résolution de la collision:
+Complexité des opérations de l’hachage fermé
+Cas Linear Probing
+• Toutes les
+  opérations sont en
+  O(n) à cause de la
+  recherche de
+  l’emplacement de la
+  clé à l’intérieur du
+  tableau interne de la
+  table de hachage.
+Adressage ouvert versus adressage fermé :
+Exemple récapitulatif
+
+
+
+
+        https://medium.com/omarelgabrys-blog/hash-tables-2fec6870207f
+Adressage ouvert versus adressage fermé :
+le pour et le contre
+• Adressage fermé (chainage)
+   • Peut gérer un nombre illimité d’éléments et
+     de collisions
+   • Performances plus stables
+   • Surcoût lie a la gestion et le stockage en
+     mémoire des listes liées
+• Adressage ouvert
+   • Rapide et peu gourmand en mémoire
+   • Choix de la fonction de hachage plus difficile
+     (pour éviter les grappes)
+   • On ne peut pas avoir n > m
+   • Suppression problématique
+• D'autres alternatives existent :
+   • Two-probe hashing
+   • Cuckoo hashing
+Complexité des opérations d’un dictionnaire
+versus les autres implémentations de TAD
+
+
+
+
+                        https://www.bigocheatsheet.com/
+Références
+• https://opendsa-
+  server.cs.vt.edu/ODSA/Books/CS3/html/Dictionary.html
+• http://sdz.tdct.org/sdz/les-tables-de-hachage-1.html
+• https://slideplayer.com/slide/4793596/
+• https://www.interviewcake.com/concept/java/hash-map
+• https://medium.com/omarelgabrys-blog/hash-tables-2fec6870207f
+

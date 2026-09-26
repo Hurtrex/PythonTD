@@ -1,0 +1,222 @@
+Structures de données linéaires : ADT Stack
+rouanehm@gmail.com
+
+Notion de Stack (pile)
+- Une pile est une structure linéaire permettant de stocker et de restaurer des données selon un ordre LIFO (Last In, First Out ou « dernier entré, premier sorti »)
+- Les insertions (empilements) et les suppressions (dépilements) sont restreintes à une extrémité appelée sommet de la pile.
+
+Exemple d'utilisation d'un Stack
+- Séquence Push(2), Push(3), Push(4), Push(5), Push(6) puis Pop() x5, illustrant LIFO.
+- https://en.wikipedia.org/wiki/Stack_(abstract_data_type)
+
+Stack versus Queue
+- Stack : Insertion and Deletion happen on same end (Top) — Push / Pop — Last in, first out
+- Queue : Insertion and Deletion happen on different ends (Rear/Front) — Enqueue / Dequeue — First in, first out
+- https://www.geeksforgeeks.org/queue-using-stacks/
+
+Opérations sur un Stack
+- push(o) : Inserts object o onto top of stack. Input: Object; Output: none
+- pop() : Removes the top object of stack and returns it; if stack is empty an error occurs. Input: none; Output: Object
+- size() : Returns the number of objects in stack. Input: none; Output: integer
+- isEmpty() : Return a boolean indicating if stack is empty. Input: none; Output: boolean
+- top() : return the top object of the stack, without removing it; if the stack is empty an error occurs. Input: none; Output: Object
+
+Interface Scala (IStack[T]) :
+trait IStack[T] {
+  def push(e: T)
+  def pop(): T
+  def peek: T
+  def isEmpty: Boolean
+}
+
+Implémenter un Stack : Les alternatives
+- Représentation contiguë :
+  - Les éléments du Stack sont rangés dans un tableau
+  - Un entier représente la position du sommet du Stack.
+- Représentation chaînée :
+  - Les éléments du Stack sont chaînés entre eux
+  - Une référence du premier élément désigne le stack et représente le sommet de ce stack.
+  - Un Stack vide est représentée par une référence NULL
+- Complexité: O(1) — constant, class creation by composition (array/ArrayList/Vector/LinkedList as private data)
+
+Implémenter un Stack : Tableau ordinaire
+Stack-Empty(S)
+1  return S.top == 0
+
+Push(S, x)
+1  if S.top == S.length
+2      error "overflow"
+3  S.top = S.top + 1
+4  S[S.top] = x
+
+Pop(S)
+1  if Stack-Empty(S)
+2      error "underflow"
+3  else S.top = S.top - 1
+4      return S[top(S)+1]
+
+Implémenter un Stack : Tableau ordinaire — Version Scala
+class MutableArrayStack[T: ClassTag](maxsize: Int) extends IStack[T] {
+  private var top = 0
+  private var data = new Array[T](maxsize)
+
+  override def push(e: T): Unit = {
+    if (top >= data.length) {
+      val largerArray = new Array[T](data.length * 2)
+      Array.copy(data, 0, largerArray, 0, data.length)
+      data = largerArray
+    }
+    data(top) = e
+    top += 1
+  }
+
+  override def pop(): T = {
+    assert(!isEmpty, "Pop called on an empty stack.")
+    top -= 1
+    data(top)
+  }
+
+  override def peek: T = data(top - 1)
+  override def isEmpty: Boolean = top == 0
+}
+
+object AppDriver extends App {
+  println("Stack AppDriver...")
+  val stackOfInt = new MutableArrayStack[Int](10)
+  stackOfInt.push(12)
+  stackOfInt.push(5)
+  while (!stackOfInt.isEmpty) {
+    println(stackOfInt.pop())
+  }
+}
+
+Implémenter un Stack : Liste chaînée simple
+Stack-Empty(S)
+1  if S.head == NIL
+2      return TRUE
+3  else return FALSE
+
+Push(S, x)
+1  x.next = S.head
+2  S.head = x
+
+Pop(S)
+1  if Stack-Empty(S)
+2      error "underflow"
+3  else x = S.head
+4      S.head = S.head.next
+5      return x
+
+Adapter une liste pour implémenter un Stack
+Deux alternatives :
+- Héritage : Stack hérite de la liste. Les méthodes de la liste sont protégées et donc accessible uniquement par le Stack.
+- Délégation : Patron Adapter. Le Stack est l'adapter. La liste est l'adaptée.
+
+Table de correspondance (Adapter pattern) :
+Stack Method   Singly Linked List Method
+size()          list.size()
+isEmpty()       list.isEmpty()
+push(e)         list.addFirst(e)
+pop()           list.removeFirst()
+top()           list.first()
+
+Complexité des opérations d'un Stack
+- Les opérations sur les piles sont toutes en O(1).
+- Ceci est valable pour les deux représentations proposées.
+
+Comparaison de complexités (worst case Access/Search/Insertion/Deletion):
+Array:               O(1) / O(n) / O(n) / O(n)
+Stack:                O(n) / O(n) / O(1) / O(1)
+Queue:                O(n) / O(n) / O(1) / O(1)
+Singly-Linked List:   O(n) / O(n) / O(1) / O(1)
+Doubly-Linked List:    O(n) / O(n) / O(1) / O(1)
+Source: https://www.bigocheatsheet.com/
+
+Applications du Stack : Appariement de parenthèses ([],() ou {})
+ParenthesesMatch(A)
+1  S = pile vide
+2  for i = 1 to A.length
+3      if A[i] est une parenthèse gauche
+4          Push(S, A[i])
+5      elseif A[i] est une parenthèse droite
+6          if Stack-Empty(S)
+7              return FALSE
+8          elseif Pop(S) n'est pas du même type que A[i]
+9              return FALSE
+10 return Stack-Empty(S)
+
+Applications du Stack : Pile d'exécution d'un programme
+- Les appels sont empilés.
+  - Les paramètres de la fonction appelée
+  - Les variables locales
+  - L'adresse de retour à la fonction appelant
+- Une fois une fonction terminée, son environnement d'exécution est dépilé.
+- Algorithmes récursifs consomment beaucoup la pile.
+
+Applications du Stack : Mot palindrome
+- Le palindrome, aussi appelé palindrome de lettres, est une figure de style désignant un texte ou un mot dont l'ordre des lettres reste le même qu'on le lise de gauche à droite ou de droite à gauche, comme dans la phrase « Ésope reste ici et se repose » ou encore « La mariée ira mal » à un accent près.
+- Exemple de code Java isPalindrome utilisant une Stack et une Queue en parallèle pour comparer les caractères.
+
+Applications du Stack : Évaluation d'une expression arithmétique
+- Hypothèses : opérandes réels, opérateurs permis +,-,*,/,^ (exponentiation), espaces permis, parenthèses permises.
+- On utilise deux piles :
+  - Operand stack : garde trace des nombres.
+  - Operator stack : garde les opérations (+, -, *, /, ^)
+- Algorithme (résumé) :
+  1. Si le caractère est un opérande, empiler sur la pile d'opérandes.
+  2. Si c'est un opérateur : si la pile d'opérateurs est vide, l'empiler ; sinon comparer la précédence avec le sommet et empiler ou traiter (Process) selon le cas.
+  3. Si c'est "(" empiler sur la pile d'opérateurs.
+  4. Si c'est ")" traiter (Process) jusqu'à rencontrer "(" correspondant, puis le dépiler et le jeter.
+- Source: https://algorithms.tutorialhorizon.com/evaluation-of-infix-expressions/
+
+Applications du Stack : Convertir un nombre décimal en binaire
+void dec_to_bin(int number) {
+    stack<int> stk;
+    while(number > 0) {
+        int rem = number % 2;
+        number = number / 2;
+        stk.push(rem);
+    }
+    while(!stk.empty()) {
+        int item;
+        item = stk.top();
+        stk.pop();
+        cout << item;
+    }
+}
+
+Applications du Stack : Convertir une expression infixe en postfixe
+- Q est une expression arithmétique infixe. On crée une expression postfixe équivalente P en ajoutant des éléments à droite de P, sans parenthèses.
+- On utilise une pile où chaque élément peut être une parenthèse gauche ou un symbole d'opération.
+- On commence avec une pile vide et on scanne Q de gauche à droite.
+- Pseudocode (résumé) :
+While (we have not reached the end of Q)
+    If (an operand is found) Add it to P
+    If (a left parenthesis is found) Push it onto the stack
+    If (a right parenthesis is found)
+        While (stack not empty AND top is not left paren) Pop and add to P
+        Pop the left parenthesis and discard it
+    If (an operator is found)
+        If (stack empty or top is left paren) Push the operator
+        Else While (stack not empty AND top not left paren AND precedence(top) >= precedence(operator))
+            Pop and add to P
+        Push the operator
+While (the stack is not empty) Pop and add to P
+- Source: http://faculty.cs.niu.edu/~hutchins/csci241/eval.htm
+
+Applications du Stack : Rearranging railcars
+- Exemple d'utilisation d'une pile pour réordonner des wagons de train (input track -> holding tracks H1,H2,H3 -> output track).
+- Source: http://www.waitingfy.com/archives/508
+
+Applications du Stack : Parcours Pre-order d'un arbre
+- Exemple d'arbre binaire avec parcours :
+  Pre-order (Root, Left, Right) : 1, 2, 4, 8, 5, 3, 6, 7, 9
+  Post-order (Left, Right, Root) : 8, 4, 5, 2, 6, 9, 7, 3, 1
+- Code Java iterativePostOrder utilisant une pile (Stack<Node>) pour simuler la récursion.
+- Source: http://codingrecipies.blogspot.com/2014/04/trees-iterative-post-order-traversal.html
+
+Références
+- https://www.cs.cmu.edu/~adamchik/15-121/lectures/Stacks%20and%20Queues/Stacks%20and%20Queues.html
+- https://www.bigocheatsheet.com/
+- https://techdifferences.com/difference-between-stack-and-queue.html
+- https://www.javatpoint.com/ds-array-implementation-of-stack
