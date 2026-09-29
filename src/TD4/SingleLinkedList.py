@@ -17,10 +17,10 @@ class SinglyLinkedList(IList):
         if self.head is None:
             self.head = new_node
         else:
-            curr = self.head
-            while curr.next:
-                curr = curr.next
-            curr.next = new_node
+            current = self.head
+            while current.next:
+                current = current.next
+            current.next = new_node
         self._size += 1
 
     def add_at(self, index, element):
@@ -29,29 +29,29 @@ class SinglyLinkedList(IList):
             new_node.next = self.head
             self.head = new_node
         else:
-            curr = self.head
+            current = self.head
             for _ in range(index - 1):
-                curr = curr.next
-            new_node.next = curr.next
-            curr.next = new_node
+                current = current.next
+            new_node.next = current.next
+            current.next = new_node
         self._size += 1
 
     def get(self, index):
-        curr = self.head
+        current = self.head
         for _ in range(index):
-            curr = curr.next
-        return curr.data
+            current = current.next
+        return current.data
 
     def remove(self, index):
         if index == 0:
             removed = self.head.data
             self.head = self.head.next
         else:
-            curr = self.head
+            current = self.head
             for _ in range(index - 1):
-                curr = curr.next
-            removed = curr.next.data
-            curr.next = curr.next.next
+                current = current.next
+            removed = current.next.data
+            current.next = current.next.next
         self._size -= 1
         return removed
 
@@ -62,11 +62,11 @@ class SinglyLinkedList(IList):
         return self.head is None
 
     def contains(self, element):
-        curr = self.head
-        while curr:
-            if curr.data == element:
+        current = self.head
+        while current:
+            if current.data == element:
                 return True
-            curr = curr.next
+            current = current.next
         return False
 
     def clear(self):
