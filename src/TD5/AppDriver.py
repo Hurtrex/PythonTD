@@ -1,7 +1,7 @@
 from src.TD5.DoublyLinkedList import DoublyLinkedList
 from src.TD5.ArrayList import ArrayList
 
-def test_DLL():
+def test_dll():
     values = DoublyLinkedList()
     values.add_back(5)
     values.add_back(2)
@@ -31,9 +31,9 @@ def test_DLL():
     # Put the item at the end
     values.put(155, 50)
     print(values)
-test_DLL()
+test_dll()
 
-def test_ArrayList():
+def test_arraylist():
     values = ArrayList(30)
     values.add_back(5)
     values.add_back(5)
@@ -43,4 +43,4 @@ def test_ArrayList():
     print(values)
     values.put_at(2,150)
     print(values)
-test_ArrayList()
+test_arraylist()
