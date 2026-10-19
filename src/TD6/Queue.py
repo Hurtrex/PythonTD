@@ -1,5 +1,6 @@
 from collections import deque
 
+
 class Queue(object):
     def __init__(self):
         self.__items = deque()
