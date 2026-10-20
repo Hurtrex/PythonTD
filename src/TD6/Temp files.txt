@@ -10,7 +10,7 @@ def insert(self,item):
     self.items.append(item) #append works cuz its a list
     heapify_up(self.items.len-1) #equivalent of i = items.len() -1
 
-def heapify_up(self,start):
+def heapify_up(self,start
     i = start
     while(i>0):
         if(self.items[i] > self.items[(i-1)%2]): #i is the current element aka the runner
