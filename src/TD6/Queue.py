@@ -1,21 +1,22 @@
-from collections import deque
+from src.TD5.ArrayList import ArrayList
 
 
-class Queue(object):
+class Queue:
     def __init__(self):
-        self.__items = deque()
+        self.items = ArrayList(10)
 
     def enqueue(self, item):
-        self.__items.append(item)
+        self.items.add_back(item)
 
     def dequeue(self):
-        self.__items.popleft()
+        data = self.items.remove_front()
+        return data
 
     def peek(self):
-        return self.__items[0]
+        return self.items[0]
 
     def is_empty(self):
-        return len(self.__items) == 0
+        return len(self.items) == 0
 
     def size(self):
-        return len(self.__items)
+        return len(self.items)

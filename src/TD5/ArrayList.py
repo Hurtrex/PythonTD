@@ -4,13 +4,14 @@ class ArrayList:
         self.length = 0
         self.capacity = max_size
         self.values = (max_size * ctypes.py_object)()
-
+    #Those method can be called automatically so that simply going
+    #len(my_list) calls __len__ and my_list[3] calls __getitem__
     def __len__(self):
         return self.length
 
     def __getitem__(self, position):
         if not 0<=position<self.length:
-            return IndexError('position out of range')
+            raise IndexError('position out of range')
         return self.values[position]
 
     def add_back(self, item):
@@ -20,9 +21,6 @@ class ArrayList:
         self.length += 1
 
 
-    #We resize the tableau size, we put it in a temp variable
-    #And then we transfert from the old to the new one
-    #And then the old one to the new with a bigger capacity
     def _resize(self, new_capacity):
         new_items = (new_capacity * ctypes.py_object)()
         for i in range(self.length):
@@ -38,18 +36,21 @@ class ArrayList:
         self.values[0] = item
         self.length += 1
 
-    def __str__(self):
-        to_return = "["
-        for i in range(self.length):
-            to_return = to_return + str(self.values[i])
-            if i < self.length - 1:
-                to_return = to_return + ','
-        return to_return + ']'
+    def remove_front(self):
+        if self.length == 0:
+            raise IndexError('remove from empty list')
+        item = self.values[0]
+        for i in range(self.length - 1):
+            self.values[i] = self.values[i + 1]
+        self.length -= 1
+        self.values[self.length] = None
+        return item
 
     def put_at(self,position,item):
         if position < 0:
             return None
         if position >= self.length:
+            return None
             self.add_back(item)
         if position == 0:
             self.add_front(item)
@@ -58,3 +59,12 @@ class ArrayList:
             self.values[i] = self.__getitem__(i-1)
         self.values[position] = item
         self.length += 1
+        return None
+
+    def __str__(self):
+        to_return = "["
+        for i in range(self.length):
+            to_return = to_return + str(self.values[i])
+            if i < self.length - 1:
+                to_return = to_return + ','
+        return to_return + ']'

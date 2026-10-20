@@ -1,0 +1,6 @@
+For ArrayList
+
+In Resize:
+    We resize the tableau size, we put it in a temp variable
+    And then we transfer from the old to the new one
+    And then the old one to the new with a bigger capacity
