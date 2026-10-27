@@ -48,7 +48,7 @@ class DoublyLinkedList(IList):
 
     def get(self, index):
         curr = self.head
-        for _ in range(index):
+        for i in range(index):
             curr = curr.next
         return curr.data
 
