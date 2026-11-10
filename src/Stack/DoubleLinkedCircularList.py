@@ -1,5 +1,3 @@
-from operator import index
-
 from src.Stack import DLNode
 
 
@@ -27,8 +25,10 @@ class DoubleLinkedCircularList:
 
 
     def remove_front(self,item):
+        pass
 
     def remove_back(self,item):
+        pass
 
     def get(self,index):
         current = self.head
@@ -46,7 +46,7 @@ class DoubleLinkedCircularList:
             current = current.next
         return count
 
-    #TODO
+    #TODO1
     #add_back
     #remove_front
     #remove_back

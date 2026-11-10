@@ -15,5 +15,5 @@ class DLCLBasedStack:
 
     def top(self):
         return self.items.get(0)
-    #if if we use back
+    #if we use back
     #return self.items.get(self.items.lenght()-1)

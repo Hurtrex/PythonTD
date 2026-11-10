@@ -1,4 +1,4 @@
-from src.Stack.StackAiGen.Node import Node
+from src.StackAiGen.Node import Node
 
 
 class Stack:

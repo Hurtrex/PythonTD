@@ -1,4 +1,4 @@
-from src.Stack.StackAiGen.Stack import Stack
+from src.StackAiGen.Stack import Stack
 
 
 class MathExpCalculator:

@@ -3,7 +3,7 @@ class Queue:
         self.__capacity = capacity
         self.__front = 0
         self.__rear = 0
-        self.__items = Queue.build_array(self.capacity)
+        self.__items = Queue.build_array(capacity)
 
     def enqueue(self,item):
         # 1. Is the dequeue empty?

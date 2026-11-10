@@ -1,0 +1,43 @@
+Projet
+text: William est un bon gars
+step 1 create un map
+on compte les lettres so like
+w 1
+i 1
+l 1
+then another l so we add +1 Map[k] = Map[k] ++
+so for example
+r 1
+g 1
+o 1
+b 1
+w 1
+i 2
+l 2
+a 2
+m 1
+e 1
+s 2
+t 1
+t 1
+u 1
+n 2
+
+step 2 mettre les clés dans une liste de noeud binaire triés
+in a list binary nodes sorted
+| D | 1 | | C | 2 | | A | 3 | | B | 5 |
+|LC | RC| |LC | RC| |LC | RC| |LC | RC| 
+
+Node -> symbole (letter) (thats the key)
+	 -> Frequency (thats the  value)
+	 -> LC
+	 -> RC
+	 
+step 3 build huff tree check inside excalidraw
+
+step 4 générer les codes de huffman huff codes this get filels after the huf 
+
+step 5 encode file using huff code
+
+step 6 export message into file to encode
+écrire la table so only the symbole and the huff code then dividing into 16 for ascii
